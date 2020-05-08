@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ds">
+      <UniqueIdentifier>{d26df0d8-b6fe-4219-a93a-4c221174601f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="riesenie">
+      <UniqueIdentifier>{8b373b7f-6bae-4a79-b506-eb94bc498338}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="structures">
+      <UniqueIdentifier>{c20119bb-dec1-4883-bf50-c79a40ede3e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="structures\list">
+      <UniqueIdentifier>{7cf67de8-031a-4d59-bf5d-6d0dd74648ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="structures\array">
+      <UniqueIdentifier>{9174d431-93ac-406b-b7d1-5701f816db88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="structures\tree">
+      <UniqueIdentifier>{41b37aaa-aadd-46a7-8c2f-073636ee9c86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="structures\vector">
+      <UniqueIdentifier>{b230d2a7-fce2-4c89-88cd-c3b0255a1c52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="structures\common">
+      <UniqueIdentifier>{516119e2-e867-4aaf-9a1d-e71bfd7ddb2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data">
+      <UniqueIdentifier>{e7cd59e5-a574-4b17-8b3f-e878eff99870}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles">
+      <UniqueIdentifier>{7c88f11a-b6b7-48fb-9c7f-89378662981b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="structures\table">
+      <UniqueIdentifier>{2f415aef-d8aa-48c5-a6d2-53dac6b0380b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="structure.cpp">
+      <Filter>structures\common</Filter>
+    </ClCompile>
+    <ClCompile Include="ds_routines.cpp">
+      <Filter>ds</Filter>
+    </ClCompile>
+    <ClCompile Include="ds_structure_factory.cpp">
+      <Filter>ds</Filter>
+    </ClCompile>
+    <ClCompile Include="vector.cpp">
+      <Filter>structures\vector</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="UzemnaJednotka.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Roztried.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Informacia.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Filter.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="k_way_tree.h">
+      <Filter>structures\tree</Filter>
+    </ClInclude>
+    <ClInclude Include="multi_way_tree.h">
+      <Filter>structures\tree</Filter>
+    </ClInclude>
+    <ClInclude Include="tree.h">
+      <Filter>structures\tree</Filter>
+    </ClInclude>
+    <ClInclude Include="structure.h">
+      <Filter>structures\common</Filter>
+    </ClInclude>
+    <ClInclude Include="structure_iterator.h">
+      <Filter>structures\common</Filter>
+    </ClInclude>
+    <ClInclude Include="ds_routines.h">
+      <Filter>ds</Filter>
+    </ClInclude>
+    <ClInclude Include="heap_monitor.h">
+      <Filter>ds</Filter>
+    </ClInclude>
+    <ClInclude Include="ds_structure_types.h">
+      <Filter>ds</Filter>
+    </ClInclude>
+    <ClInclude Include="ds_structure_factory.h">
+      <Filter>ds</Filter>
+    </ClInclude>
+    <ClInclude Include="array.h">
+      <Filter>structures\array</Filter>
+    </ClInclude>
+    <ClInclude Include="vector.h">
+      <Filter>structures\vector</Filter>
+    </ClInclude>
+    <ClInclude Include="array_list.h">
+      <Filter>structures\list</Filter>
+    </ClInclude>
+    <ClInclude Include="list.h">
+      <Filter>structures\list</Filter>
+    </ClInclude>
+    <ClInclude Include="unsorted_sequence_table.h">
+      <Filter>structures\table</Filter>
+    </ClInclude>
+    <ClInclude Include="table.h">
+      <Filter>structures\table</Filter>
+    </ClInclude>
+    <ClInclude Include="sorted_sequence_table.h">
+      <Filter>structures\table</Filter>
+    </ClInclude>
+    <ClInclude Include="sequence_table.h">
+      <Filter>structures\table</Filter>
+    </ClInclude>
+    <ClInclude Include="data_types.h">
+      <Filter>data</Filter>
+    </ClInclude>
+    <ClInclude Include="UzemnaJednotka.h">
+      <Filter>HeaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Roztried.h">
+      <Filter>HeaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Informacia.h">
+      <Filter>HeaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Filter.h">
+      <Filter>HeaderFiles</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
