@@ -133,5 +133,8 @@
     <ClInclude Include="Filter.h">
       <Filter>HeaderFiles</Filter>
     </ClInclude>
+    <ClInclude Include="linked_list.h">
+      <Filter>structures\list</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

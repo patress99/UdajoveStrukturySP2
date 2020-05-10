@@ -1,7 +1,7 @@
 #include "Filter.h"
 
-Filter::Filter() : 
-roztried_(new Roztried())
+Filter::Filter() :
+	roztried_(new Roztried())
 {
 	roztried_->roztriedUzemneJednotky();
 	roztried_->priradDataObciam();
@@ -12,20 +12,33 @@ Filter::~Filter()
 	delete roztried_;
 }
 
-void Filter::filtrujPodlaNazvu(wstring nazovObce)
+void Filter::filtrujPodlaNazvu(string nazovObce)
 {
-	int pocitadlo1 = 0;
-	for (TableItem<int, UzemnaJednotka*>* temp : *roztried_->getTabulkaObci())
+	cout << nazovObce << endl;
+	//roztried_->najdiObec(nazovObce);
+	roztried_->najdiPodlaNazvu(nazovObce);
+}
+
+void Filter::filterVolici(int dolnaHranica, int hornaHranica)
+{
+	for (TableItem<int, UzemnaJednotka*>* temp : roztried_->getTabulkaVsetkeho())
 	{
-		wcout << temp->accessData()->getNazov() << " " << pocitadlo1 <<endl;
-		if (temp->accessData()->getNazov() == nazovObce)
+		if (temp->accessData()->getPocetZapisanychVolicov() >= dolnaHranica && temp->accessData()->getPocetZapisanychVolicov() <= hornaHranica)
 		{
-			wcout << temp->accessData()->getNazov() << " " << temp->accessData()->getUcast() << endl;
-		}		
-		pocitadlo1++;
-		if (pocitadlo1 == 2927)
-		{
-			wcout << nazovObce << endl;
+			cout << temp->accessData()->getNazov() << " " << temp->accessData()->getkamPatrimJa()->getNazov() << " " << temp->accessData()->getPocetZapisanychVolicov() << endl;
 		}
+
 	}
+}
+
+void Filter::vypisPodlaNazvu()
+{
+	/*for (TableItem<string, UzemnaJednotka*>* temp : roztried_->getTabulkaObciPodlaNazvu())
+	{
+		if (temp->accessData()->getPocetZapisanychVolicov() >= dolnaHranica && temp->accessData()->getPocetZapisanychVolicov() <= hornaHranica)
+		{
+
+		}
+
+	}*/
 }

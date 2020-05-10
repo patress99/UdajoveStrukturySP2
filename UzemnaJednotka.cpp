@@ -1,6 +1,6 @@
 #include "UzemnaJednotka.h"
 
-UzemnaJednotka::UzemnaJednotka(wstring nazov, TypUzemnejJednotky typ, UzemnaJednotka* kamPatrim) : 
+UzemnaJednotka::UzemnaJednotka(string nazov, TypUzemnejJednotky typ, UzemnaJednotka* kamPatrim) :
 	nazov_(nazov), typUzemnejJednotky_(typ), kamPatrimJa_(kamPatrim)
 {
 	this->ktoPatriDoMna_ = new SortedSequenceTable<int, UzemnaJednotka*>();
@@ -11,13 +11,13 @@ UzemnaJednotka::~UzemnaJednotka()
 	if (this->ktoPatriDoMna_ != nullptr)
 	{
 		delete this->ktoPatriDoMna_;
-	}	
+	}
 }
 
 void UzemnaJednotka::pridajPotomka(int key, UzemnaJednotka* uJ)
 {
-	this->ktoPatriDoMna_->insert(key, uJ);	
-	
+	this->ktoPatriDoMna_->insert(key, uJ);
+
 }
 
 void UzemnaJednotka::setUcast(double ucast)
@@ -42,7 +42,7 @@ int UzemnaJednotka::getCisloOkrsku()
 
 void UzemnaJednotka::setPocetZapisanychVolicov(int pocet)
 {
-	pocet_zap_volicov_ = pocet;
+	pocet_zap_volicov_ += pocet;
 }
 
 int UzemnaJednotka::getPocetZapisanychVolicov()
@@ -120,12 +120,26 @@ double UzemnaJednotka::getP_hl_pct()
 	return p_hl_pct;
 }
 
+
 SortedSequenceTable<int, UzemnaJednotka*>* UzemnaJednotka::getKtoPatriDoMna()
 {
 	return ktoPatriDoMna_;
 }
 
-wstring UzemnaJednotka::getNazov()
+UzemnaJednotka* UzemnaJednotka::getkamPatrimJa()
+{
+	if (kamPatrimJa_ != nullptr)
+	{
+		return kamPatrimJa_;
+	}
+	else
+	{
+		return nullptr;
+	}
+
+}
+
+string UzemnaJednotka::getNazov()
 {
 	return nazov_;
 }

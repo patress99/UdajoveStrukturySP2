@@ -7,11 +7,13 @@ class Filter
 public:
 	Filter();
 	~Filter();
-	void filtrujPodlaNazvu(wstring nazovObce);
+	void filtrujPodlaNazvu(string nazovObce);
+	void filterVolici(int dolnaHranica, int hornaHranica);
+	void vypisPodlaNazvu();
 
 
 
 private:
 	Roztried* roztried_;
-	
+
 };

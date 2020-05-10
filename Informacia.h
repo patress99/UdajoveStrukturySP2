@@ -4,12 +4,12 @@
 class Informacia
 {
 private:
-	std::wstring informacia_;
+	std::string informacia_;
 public:
 
-	Informacia(std::wstring informacia);
+	Informacia(std::string informacia);
 	~Informacia();
 
-	std::wstring getInformacia();
+	std::string getInformacia();
 };
 

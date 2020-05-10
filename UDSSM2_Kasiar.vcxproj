@@ -158,6 +158,7 @@
     <ClInclude Include="Filter.h" />
     <ClInclude Include="heap_monitor.h" />
     <ClInclude Include="k_way_tree.h" />
+    <ClInclude Include="linked_list.h" />
     <ClInclude Include="list.h" />
     <ClInclude Include="multi_way_tree.h" />
     <ClInclude Include="Roztried.h" />

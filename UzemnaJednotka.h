@@ -14,15 +14,16 @@ using namespace std;
 class UzemnaJednotka
 {
 public:
-	UzemnaJednotka(wstring nazov, TypUzemnejJednotky typ, UzemnaJednotka* kamPatrim);
+	UzemnaJednotka(string nazov, TypUzemnejJednotky typ, UzemnaJednotka* kamPatrim);
 	~UzemnaJednotka();
 
-	wstring getNazov();
+	string getNazov();
 	TypUzemnejJednotky getTypUzemnejJednotky();
 	SortedSequenceTable<int, UzemnaJednotka*>* getKtoPatriDoMna();
+	UzemnaJednotka* getkamPatrimJa();
 	void pridajPotomka(int key, UzemnaJednotka* uJ);
 
-	
+
 	void setUcast(double ucast);
 	double getUcast();
 	void setCisloOkrsku(int cisloOkrsku);
@@ -46,18 +47,17 @@ public:
 
 
 private:
-	wstring nazov_;
+	string nazov_;
 	SortedSequenceTable<int, UzemnaJednotka*>* ktoPatriDoMna_;
 	UzemnaJednotka* kamPatrimJa_;
 	TypUzemnejJednotky typUzemnejJednotky_;
 
-	
 	int kodObce_, cisloOkrsku_, pocet_zap_volicov_,
 		pocet_zuc_volicov_, p_ooo,
 		p_noc, p_hl;
 	double ucast_, p_ooo_pct, p_noc_pct, p_hl_pct;
 
 
-	
+
 };
 
