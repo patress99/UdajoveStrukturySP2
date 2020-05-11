@@ -1,35 +1,56 @@
 ﻿  main.cpp
   Roztried.cpp
-C:\Users\Paťo\source\repos\UDSSM2_Kasiar\array_list.h(289,13): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Paťo\source\repos\UDSSM2_Kasiar\array_list.h(286): message : while compiling class template member function 'T structures::ArrayList<T>::removeAt(const int)'
+C:\Users\Paťo\Documents\GitHub\UdajoveStrukturySP2\array_list.h(289,13): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Paťo\Documents\GitHub\UdajoveStrukturySP2\array_list.h(286): message : while compiling class template member function 'T structures::ArrayList<T>::removeAt(const int)'
           with
           [
               T=Informacia *
           ]
-C:\Users\Paťo\source\repos\UDSSM2_Kasiar\array_list.h(278): message : see reference to function template instantiation 'T structures::ArrayList<T>::removeAt(const int)' being compiled
+C:\Users\Paťo\Documents\GitHub\UdajoveStrukturySP2\array_list.h(278): message : see reference to function template instantiation 'T structures::ArrayList<T>::removeAt(const int)' being compiled
           with
           [
               T=Informacia *
           ]
-C:\Users\Paťo\source\repos\UDSSM2_Kasiar\Roztried.cpp(77): message : see reference to class template instantiation 'structures::ArrayList<Informacia *>' being compiled
+C:\Users\Paťo\Documents\GitHub\UdajoveStrukturySP2\Roztried.cpp(65): message : see reference to class template instantiation 'structures::ArrayList<Informacia *>' being compiled
   Filter.cpp
-C:\Users\Paťo\source\repos\UDSSM2_Kasiar\array_list.h(289,13): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Paťo\source\repos\UDSSM2_Kasiar\array_list.h(286): message : while compiling class template member function 'T structures::ArrayList<T>::removeAt(const int)'
+C:\Users\Paťo\Documents\GitHub\UdajoveStrukturySP2\array_list.h(289,13): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Paťo\Documents\GitHub\UdajoveStrukturySP2\array_list.h(286): message : while compiling class template member function 'T structures::ArrayList<T>::removeAt(const int)'
           with
           [
               T=structures::TableItem<int,UzemnaJednotka *> *
           ]
-C:\Users\Paťo\source\repos\UDSSM2_Kasiar\array_list.h(278): message : see reference to function template instantiation 'T structures::ArrayList<T>::removeAt(const int)' being compiled
+C:\Users\Paťo\Documents\GitHub\UdajoveStrukturySP2\array_list.h(278): message : see reference to function template instantiation 'T structures::ArrayList<T>::removeAt(const int)' being compiled
           with
           [
               T=structures::TableItem<int,UzemnaJednotka *> *
           ]
-C:\Users\Paťo\source\repos\UDSSM2_Kasiar\sorted_sequence_table.h(49): message : see reference to class template instantiation 'structures::ArrayList<structures::TableItem<int,UzemnaJednotka *> *>' being compiled
-C:\Users\Paťo\source\repos\UDSSM2_Kasiar\sorted_sequence_table.h(48): message : while compiling class template member function 'structures::SortedSequenceTable<int,UzemnaJednotka *>::SortedSequenceTable(void)'
-C:\Users\Paťo\source\repos\UDSSM2_Kasiar\sorted_sequence_table.h(55): message : see reference to function template instantiation 'structures::SortedSequenceTable<int,UzemnaJednotka *>::SortedSequenceTable(void)' being compiled
-C:\Users\Paťo\source\repos\UDSSM2_Kasiar\sorted_sequence_table.h(54): message : while compiling class template member function 'structures::SortedSequenceTable<int,UzemnaJednotka *>::SortedSequenceTable(const structures::SortedSequenceTable<int,UzemnaJednotka *> &)'
-C:\Users\Paťo\source\repos\UDSSM2_Kasiar\sorted_sequence_table.h(69): message : see reference to function template instantiation 'structures::SortedSequenceTable<int,UzemnaJednotka *>::SortedSequenceTable(const structures::SortedSequenceTable<int,UzemnaJednotka *> &)' being compiled
-C:\Users\Paťo\source\repos\UDSSM2_Kasiar\sorted_sequence_table.h(68): message : while compiling class template member function 'structures::Structure *structures::SortedSequenceTable<int,UzemnaJednotka *>::clone(void) const'
-C:\Users\Paťo\source\repos\UDSSM2_Kasiar\Filter.cpp(18): message : see reference to class template instantiation 'structures::SortedSequenceTable<int,UzemnaJednotka *>' being compiled
+C:\Users\Paťo\Documents\GitHub\UdajoveStrukturySP2\sorted_sequence_table.h(49): message : see reference to class template instantiation 'structures::ArrayList<structures::TableItem<int,UzemnaJednotka *> *>' being compiled
+C:\Users\Paťo\Documents\GitHub\UdajoveStrukturySP2\sorted_sequence_table.h(48): message : while compiling class template member function 'structures::SortedSequenceTable<int,UzemnaJednotka *>::SortedSequenceTable(void)'
+C:\Users\Paťo\Documents\GitHub\UdajoveStrukturySP2\sorted_sequence_table.h(55): message : see reference to function template instantiation 'structures::SortedSequenceTable<int,UzemnaJednotka *>::SortedSequenceTable(void)' being compiled
+C:\Users\Paťo\Documents\GitHub\UdajoveStrukturySP2\sorted_sequence_table.h(54): message : while compiling class template member function 'structures::SortedSequenceTable<int,UzemnaJednotka *>::SortedSequenceTable(const structures::SortedSequenceTable<int,UzemnaJednotka *> &)'
+C:\Users\Paťo\Documents\GitHub\UdajoveStrukturySP2\sorted_sequence_table.h(69): message : see reference to function template instantiation 'structures::SortedSequenceTable<int,UzemnaJednotka *>::SortedSequenceTable(const structures::SortedSequenceTable<int,UzemnaJednotka *> &)' being compiled
+C:\Users\Paťo\Documents\GitHub\UdajoveStrukturySP2\sorted_sequence_table.h(68): message : while compiling class template member function 'structures::Structure *structures::SortedSequenceTable<int,UzemnaJednotka *>::clone(void) const'
+C:\Users\Paťo\Documents\GitHub\UdajoveStrukturySP2\Filter.cpp(24): message : see reference to class template instantiation 'structures::SortedSequenceTable<int,UzemnaJednotka *>' being compiled
+  UzemnaJednotka.cpp
+C:\Users\Paťo\Documents\GitHub\UdajoveStrukturySP2\array_list.h(289,13): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Paťo\Documents\GitHub\UdajoveStrukturySP2\array_list.h(286): message : while compiling class template member function 'T structures::ArrayList<T>::removeAt(const int)'
+          with
+          [
+              T=structures::TableItem<int,UzemnaJednotka *> *
+          ]
+C:\Users\Paťo\Documents\GitHub\UdajoveStrukturySP2\array_list.h(278): message : see reference to function template instantiation 'T structures::ArrayList<T>::removeAt(const int)' being compiled
+          with
+          [
+              T=structures::TableItem<int,UzemnaJednotka *> *
+          ]
+C:\Users\Paťo\Documents\GitHub\UdajoveStrukturySP2\sorted_sequence_table.h(49): message : see reference to class template instantiation 'structures::ArrayList<structures::TableItem<K,T> *>' being compiled
+          with
+          [
+              K=int,
+              T=UzemnaJednotka *
+          ]
+C:\Users\Paťo\Documents\GitHub\UdajoveStrukturySP2\sorted_sequence_table.h(48): message : while compiling class template member function 'structures::SortedSequenceTable<int,UzemnaJednotka *>::SortedSequenceTable(void)'
+C:\Users\Paťo\Documents\GitHub\UdajoveStrukturySP2\UzemnaJednotka.cpp(6): message : see reference to function template instantiation 'structures::SortedSequenceTable<int,UzemnaJednotka *>::SortedSequenceTable(void)' being compiled
+C:\Users\Paťo\Documents\GitHub\UdajoveStrukturySP2\UzemnaJednotka.cpp(6): message : see reference to class template instantiation 'structures::SortedSequenceTable<int,UzemnaJednotka *>' being compiled
   Generating Code...
-  UDSSM2_Kasiar.vcxproj -> C:\Users\Paťo\source\repos\UDSSM2_Kasiar\Debug\UDSSM2_Kasiar.exe
+  UDSSM2_Kasiar.vcxproj -> C:\Users\Paťo\Documents\GitHub\UdajoveStrukturySP2\Debug\UDSSM2_Kasiar.exe

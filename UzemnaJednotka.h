@@ -26,24 +26,14 @@ public:
 
 	void setUcast(double ucast);
 	double getUcast();
-	void setCisloOkrsku(int cisloOkrsku);
-	int getCisloOkrsku();
+
 	void setPocetZapisanychVolicov(int pocet);
 	int getPocetZapisanychVolicov();
-	void setPocetZucastnenychVolicov(int pocet);
-	int getPocetZucastnenychVolicov();
-	void setPOOO(int pocet);
-	int getPOOO();
-	void setPNOC(int pocet);
-	int getPNOC();
-	void setPHL(int pocet);
-	int getPHL();
-	void setP_ooo_pct(double pct);
-	double getP_ooo_pct();
-	void setP_noc_pct(double pct);
-	double getP_noc_pct();
-	void setP_hl_pct(double pct);
-	double getP_hl_pct();
+
+	void setPocetZucastnenych(int pocet);
+	int getPocetZUcastnenych();
+
+	double ucastVPct();
 
 
 private:
@@ -51,11 +41,8 @@ private:
 	SortedSequenceTable<int, UzemnaJednotka*>* ktoPatriDoMna_;
 	UzemnaJednotka* kamPatrimJa_;
 	TypUzemnejJednotky typUzemnejJednotky_;
-
-	int kodObce_, cisloOkrsku_, pocet_zap_volicov_,
-		pocet_zuc_volicov_, p_ooo,
-		p_noc, p_hl;
-	double ucast_, p_ooo_pct, p_noc_pct, p_hl_pct;
+	double kodObce_, pocet_zap_volicov_, pocet_zuc_volicov_;
+	double ucast_;
 
 
 

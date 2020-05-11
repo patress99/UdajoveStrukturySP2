@@ -4,6 +4,9 @@ UzemnaJednotka::UzemnaJednotka(string nazov, TypUzemnejJednotky typ, UzemnaJedno
 	nazov_(nazov), typUzemnejJednotky_(typ), kamPatrimJa_(kamPatrim)
 {
 	this->ktoPatriDoMna_ = new SortedSequenceTable<int, UzemnaJednotka*>();
+	this->pocet_zap_volicov_ = 0;
+	this->ucast_ = 0.0;
+	this->pocet_zuc_volicov_ = 0;
 }
 
 UzemnaJednotka::~UzemnaJednotka()
@@ -22,7 +25,7 @@ void UzemnaJednotka::pridajPotomka(int key, UzemnaJednotka* uJ)
 
 void UzemnaJednotka::setUcast(double ucast)
 {
-	this->ucast_ = ucast;
+	this->ucast_ += ucast;
 }
 
 double UzemnaJednotka::getUcast()
@@ -30,19 +33,10 @@ double UzemnaJednotka::getUcast()
 	return this->ucast_;
 }
 
-void UzemnaJednotka::setCisloOkrsku(int cisloOkrsku)
-{
-	cisloOkrsku_ = cisloOkrsku;
-}
-
-int UzemnaJednotka::getCisloOkrsku()
-{
-	return cisloOkrsku_;
-}
 
 void UzemnaJednotka::setPocetZapisanychVolicov(int pocet)
 {
-	pocet_zap_volicov_ += pocet;
+	this->pocet_zap_volicov_ +=  pocet;
 }
 
 int UzemnaJednotka::getPocetZapisanychVolicov()
@@ -50,75 +44,21 @@ int UzemnaJednotka::getPocetZapisanychVolicov()
 	return pocet_zap_volicov_;
 }
 
-void UzemnaJednotka::setPocetZucastnenychVolicov(int pocet)
+void UzemnaJednotka::setPocetZucastnenych(int pocet)
 {
-	pocet_zuc_volicov_ = pocet;
+	this->pocet_zuc_volicov_ += pocet;
 }
 
-int UzemnaJednotka::getPocetZucastnenychVolicov()
+int UzemnaJednotka::getPocetZUcastnenych()
 {
-	return pocet_zuc_volicov_;
+	return this->pocet_zuc_volicov_;
 }
 
-void UzemnaJednotka::setPOOO(int pocet)
+double UzemnaJednotka::ucastVPct()
 {
-	p_ooo = pocet;
+	return ((this->pocet_zuc_volicov_/this->pocet_zap_volicov_)*100.00);
 }
 
-int UzemnaJednotka::getPOOO()
-{
-	return p_ooo;
-}
-
-void UzemnaJednotka::setPNOC(int pocet)
-{
-	p_noc = pocet;
-}
-
-int UzemnaJednotka::getPNOC()
-{
-	return p_noc;
-}
-
-void UzemnaJednotka::setPHL(int pocet)
-{
-	p_hl = pocet;
-}
-
-int UzemnaJednotka::getPHL()
-{
-	return p_hl;
-}
-
-void UzemnaJednotka::setP_ooo_pct(double pct)
-{
-	p_ooo_pct = pct;
-}
-
-double UzemnaJednotka::getP_ooo_pct()
-{
-	return p_ooo_pct;
-}
-
-void UzemnaJednotka::setP_noc_pct(double pct)
-{
-	p_noc_pct = pct;
-}
-
-double UzemnaJednotka::getP_noc_pct()
-{
-	return p_noc_pct;
-}
-
-void UzemnaJednotka::setP_hl_pct(double pct)
-{
-	p_hl_pct = pct;
-}
-
-double UzemnaJednotka::getP_hl_pct()
-{
-	return p_hl_pct;
-}
 
 
 SortedSequenceTable<int, UzemnaJednotka*>* UzemnaJednotka::getKtoPatriDoMna()

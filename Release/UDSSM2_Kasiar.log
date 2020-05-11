@@ -1,18 +1,4 @@
-﻿  main.cpp
-  Roztried.cpp
-C:\Users\Paťo\Documents\GitHub\UdajoveStrukturySP2\array_list.h(289,13): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Paťo\Documents\GitHub\UdajoveStrukturySP2\array_list.h(286): message : while compiling class template member function 'T structures::ArrayList<T>::removeAt(const int)'
-          with
-          [
-              T=Informacia *
-          ]
-C:\Users\Paťo\Documents\GitHub\UdajoveStrukturySP2\array_list.h(278): message : see reference to function template instantiation 'T structures::ArrayList<T>::removeAt(const int)' being compiled
-          with
-          [
-              T=Informacia *
-          ]
-C:\Users\Paťo\Documents\GitHub\UdajoveStrukturySP2\Roztried.cpp(95): message : see reference to class template instantiation 'structures::ArrayList<Informacia *>' being compiled
-  Filter.cpp
+﻿  Filter.cpp
 C:\Users\Paťo\Documents\GitHub\UdajoveStrukturySP2\array_list.h(289,13): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Paťo\Documents\GitHub\UdajoveStrukturySP2\array_list.h(286): message : while compiling class template member function 'T structures::ArrayList<T>::removeAt(const int)'
           with
@@ -30,10 +16,11 @@ C:\Users\Paťo\Documents\GitHub\UdajoveStrukturySP2\sorted_sequence_table.h(55):
 C:\Users\Paťo\Documents\GitHub\UdajoveStrukturySP2\sorted_sequence_table.h(54): message : while compiling class template member function 'structures::SortedSequenceTable<int,UzemnaJednotka *>::SortedSequenceTable(const structures::SortedSequenceTable<int,UzemnaJednotka *> &)'
 C:\Users\Paťo\Documents\GitHub\UdajoveStrukturySP2\sorted_sequence_table.h(69): message : see reference to function template instantiation 'structures::SortedSequenceTable<int,UzemnaJednotka *>::SortedSequenceTable(const structures::SortedSequenceTable<int,UzemnaJednotka *> &)' being compiled
 C:\Users\Paťo\Documents\GitHub\UdajoveStrukturySP2\sorted_sequence_table.h(68): message : while compiling class template member function 'structures::Structure *structures::SortedSequenceTable<int,UzemnaJednotka *>::clone(void) const'
-C:\Users\Paťo\Documents\GitHub\UdajoveStrukturySP2\Filter.cpp(24): message : see reference to class template instantiation 'structures::SortedSequenceTable<int,UzemnaJednotka *>' being compiled
+C:\Users\Paťo\Documents\GitHub\UdajoveStrukturySP2\Filter.cpp(44): message : see reference to class template instantiation 'structures::SortedSequenceTable<int,UzemnaJednotka *>' being compiled
+  main.cpp
   Generating code
-  320 of 552 functions (58.0%) were compiled, the rest were copied from previous compilation.
-    251 functions were new in current compilation
-    54 functions had inline decision re-evaluated but remain unchanged
+  2 of 527 functions ( 0.4%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   UDSSM2_Kasiar.vcxproj -> C:\Users\Paťo\Documents\GitHub\UdajoveStrukturySP2\Release\UDSSM2_Kasiar.exe

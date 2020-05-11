@@ -142,11 +142,11 @@ namespace structures
 	{
 		TableItem<K, T>* item = this->findTableItem(key);
 		if (item != nullptr)
-		{
+		{			
 			return item->accessData();
 		}
 		else
-		{
+		{			
 			throw std::out_of_range("Key does not exists.");
 		}
 	}

@@ -14,9 +14,29 @@ Filter::~Filter()
 
 void Filter::filtrujPodlaNazvu(string nazovObce)
 {
-	cout << nazovObce << endl;
-	//roztried_->najdiObec(nazovObce);
-	roztried_->najdiPodlaNazvu(nazovObce);
+	
+	if (!roztried_->getTabulkaVsetkehoPodlaNazvu().containsKey(nazovObce))
+	{
+		cout << "Zadany nazov neexistuje" << endl;
+
+	}
+	else
+	{
+		LinkedList<UzemnaJednotka*>* uj = roztried_->getTabulkaVsetkehoPodlaNazvu().operator[](nazovObce);
+		for (size_t i = 0; i < uj->size(); i++)
+		{
+			if ((*uj)[i]->getkamPatrimJa() != nullptr)
+			{
+				cout << (*uj)[i]->getNazov() << u8", patrí do: " << (*uj)[i]->getkamPatrimJa()->getNazov() << u8", poèet zapísaných volièov " << (*uj)[i]->getPocetZapisanychVolicov() << 
+				u8" volebná úèas:"  << (*uj)[i]->ucastVPct() << endl;
+			}
+			else
+			{
+				cout << "Stat: " << (*uj)[i]->getNazov() << ", pocet zapisanych volicov: " << (*uj)[i]->getPocetZapisanychVolicov() << u8" úèas: " << (*uj)[i]->ucastVPct() << endl;
+			}
+
+		}
+	}
 }
 
 void Filter::filterVolici(int dolnaHranica, int hornaHranica)
@@ -33,12 +53,12 @@ void Filter::filterVolici(int dolnaHranica, int hornaHranica)
 
 void Filter::vypisPodlaNazvu()
 {
-	/*for (TableItem<string, UzemnaJednotka*>* temp : roztried_->getTabulkaObciPodlaNazvu())
+	int i = 0;
+	for (TableItem<string, LinkedList<UzemnaJednotka*>*>* temp : roztried_->getTabulkaVsetkehoPodlaNazvu())
 	{
-		if (temp->accessData()->getPocetZapisanychVolicov() >= dolnaHranica && temp->accessData()->getPocetZapisanychVolicov() <= hornaHranica)
+		for (size_t i = 0; i < temp->accessData()->size(); i++)
 		{
-
+			cout  << temp->accessData()->operator[](i)->getNazov() << endl;
 		}
-
-	}*/
+	}
 }
