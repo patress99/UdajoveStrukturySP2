@@ -1,5 +1,5 @@
 #include "Roztried.h"
-
+#include "Filter.h"
 
 using namespace std;
 Roztried::Roztried() :
@@ -39,7 +39,7 @@ Roztried::~Roztried()
 
 	
 
-	delete stat;
+	//delete stat;
 
 
 }
@@ -54,12 +54,12 @@ void Roztried::roztriedUzemneJednotky()
 	LinkedList<UzemnaJednotka*>* zretazenieStat = new LinkedList<UzemnaJednotka*>();
 	zretazenieStat->add(stat);
 	this->tabulkaVsetkehoPodlaNazvu_->insert(stat->getNazov(), zretazenieStat);
-
+	this->tabulkaVsetkeho_->insert(0, stat);
 
 	if (opener.is_open())
 	{
 		int pocitadlo = 0;
-
+		int pocokresy = 0;
 		while (!opener.eof())
 		{
 			structures::ArrayList<Informacia*>* array = new structures::ArrayList<Informacia*>();
@@ -79,6 +79,7 @@ void Roztried::roztriedUzemneJednotky()
 				string nazovKraja = (*array)[1]->getInformacia();
 				int kodOkresu = stoi((*array)[4]->getInformacia());
 				string nazovOkresu = (*array)[5]->getInformacia();
+				string nazovOkresu1 = "Okres: " + nazovOkresu;
 				int kodObce = stoi((*array)[6]->getInformacia());
 				string nazovObce = (*array)[7]->getInformacia();
 				int pocetOkrskov = stoi((*array)[9]->getInformacia());
@@ -94,6 +95,7 @@ void Roztried::roztriedUzemneJednotky()
 					novyKraj = new UzemnaJednotka(nazovKraja, TypUzemnejJednotky::KRAJ, stat);
 					this->tabulkaVsetkeho_->insert(kodKraja, novyKraj);
 					stat->pridajPotomka(kodKraja, novyKraj);		
+					novyKraj->setKodUJ(kodKraja);
 				}
 
 				if (!this->tabulkaVsetkeho_->containsKey(kodOkresu))
@@ -102,12 +104,14 @@ void Roztried::roztriedUzemneJednotky()
 					novyOkres = new UzemnaJednotka(nazovOkresu, TypUzemnejJednotky::OKRES, krajDoKtorehoPatrim);
 					this->tabulkaVsetkeho_->insert(kodOkresu, novyOkres);
 					krajDoKtorehoPatrim->pridajPotomka(kodOkresu, novyOkres);
+					novyOkres->setKodUJ(kodOkresu);
 				}
 
 				UzemnaJednotka* okresDoKtorehoPatrim = (*this->tabulkaVsetkeho_)[kodOkresu];
 				UzemnaJednotka* novaObec = new UzemnaJednotka(nazovObce, TypUzemnejJednotky::OBEC, okresDoKtorehoPatrim);
 				this->tabulkaVsetkeho_->insert(kodObce, novaObec);
 				okresDoKtorehoPatrim->pridajPotomka(kodObce, novaObec);
+				novaObec->setKodUJ(kodObce);
 				UzemnaJednotka* okres = novaObec->getkamPatrimJa();
 				UzemnaJednotka* kraj = okres->getkamPatrimJa();
 				UzemnaJednotka* stat = kraj->getkamPatrimJa();
@@ -115,6 +119,27 @@ void Roztried::roztriedUzemneJednotky()
 					
 				LinkedList<UzemnaJednotka*>* zretazenieObci = new LinkedList<UzemnaJednotka*>();
 					
+				if (this->tabulkaVsetkehoPodlaNazvu_->containsKey(nazovOkresu))
+				{
+					
+					LinkedList<UzemnaJednotka*>* kolizia = this->tabulkaVsetkehoPodlaNazvu_->operator[](nazovOkresu);
+					if ((*kolizia)[0]->getTypUzemnejJednotky() != OKRES)
+					{
+						kolizia->add(novaObec);
+					}
+				}
+				else
+				{
+					
+				/*	cout << pocokresy++ << endl;
+					cout << nazovOkresu << endl;*/
+					LinkedList<UzemnaJednotka*>* zretazenieOkresov = new LinkedList<UzemnaJednotka*>();
+					zretazenieOkresov->add(novyOkres);
+					this->tabulkaVsetkehoPodlaNazvu_->insert(nazovOkresu, zretazenieOkresov);
+
+
+				}
+
 				if (this->tabulkaVsetkehoPodlaNazvu_->containsKey(nazovObce))
 				{
 					LinkedList<UzemnaJednotka*>* uj = (*this->tabulkaVsetkehoPodlaNazvu_)[nazovObce];
@@ -138,15 +163,10 @@ void Roztried::roztriedUzemneJednotky()
 					LinkedList<UzemnaJednotka*>* zretazenieKrajov = new LinkedList<UzemnaJednotka*>();
 					zretazenieKrajov->add(novyKraj);
 					this->tabulkaVsetkehoPodlaNazvu_->insert(nazovKraja, zretazenieKrajov);
+					
 				}
 
-				if (!this->tabulkaVsetkehoPodlaNazvu_->containsKey(nazovOkresu))
-				{
-					LinkedList<UzemnaJednotka*>* zretazenieOkresov = new LinkedList<UzemnaJednotka*>();
-					zretazenieOkresov->add(novyOkres);
-					this->tabulkaVsetkehoPodlaNazvu_->insert(nazovOkresu, zretazenieOkresov);
-				}
-
+				
 					
 				
 				//cout << pocitadlo << endl;
@@ -302,4 +322,41 @@ void Roztried::najdiPodlaNazvu(string nazov)
 
 		}
 	}
+}
+
+void Roztried::filterNajdiNazov(string nazov)
+{
+/*	Filter_fi<UzemnaJednotka, string>* f = new Filter_fi<UzemnaJednotka, string>(nazov);
+	KriteriumNazov *kriterium = new KriteriumNazov();
+
+	LinkedList<UzemnaJednotka*>* uJ = (*this->tabulkaVsetkehoPodlaNazvu_)[nazov];
+	for (size_t i = 0; i < uJ->size(); i++)
+	{
+		UzemnaJednotka* filtrovanaUJ = (*uJ)[i];
+		if (f->ohodnot(*filtrovanaUJ, *kriterium))
+		{
+			cout << filtrovanaUJ->getNazov() << " " << filtrovanaUJ->getkamPatrimJa()->getNazov() << endl;
+		}
+	}
+
+	delete f;
+	delete kriterium;*/
+}
+
+void Roztried::patrim(string nazov)
+{
+
+
+	UzemnaJednotka* uJ = (*this->tabulkaVsetkeho_)[6];
+	cout << (*this->tabulkaVsetkeho_)[0]->getNazov() << endl;
+	if (uJ->patriPod((*this->tabulkaVsetkeho_)[6]))
+	{
+		
+		cout << "ano patri" << endl;
+	}
+	else
+	{
+		cout << "nie nepatri" << endl;
+	}
+	
 }

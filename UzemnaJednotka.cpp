@@ -23,12 +23,22 @@ void UzemnaJednotka::pridajPotomka(int key, UzemnaJednotka* uJ)
 
 }
 
+void UzemnaJednotka::setKodUJ(int key)
+{
+	this->kodUJ_ = key;
+}
+
+int UzemnaJednotka::getKodUJ() const
+{
+	return this->kodUJ_;
+}
+
 void UzemnaJednotka::setUcast(double ucast)
 {
 	this->ucast_ += ucast;
 }
 
-double UzemnaJednotka::getUcast()
+double UzemnaJednotka::getUcast() const
 {
 	return this->ucast_;
 }
@@ -39,7 +49,7 @@ void UzemnaJednotka::setPocetZapisanychVolicov(int pocet)
 	this->pocet_zap_volicov_ +=  pocet;
 }
 
-int UzemnaJednotka::getPocetZapisanychVolicov()
+int UzemnaJednotka::getPocetZapisanychVolicov() const
 {
 	return pocet_zap_volicov_;
 }
@@ -79,12 +89,38 @@ UzemnaJednotka* UzemnaJednotka::getkamPatrimJa()
 
 }
 
-string UzemnaJednotka::getNazov()
+bool UzemnaJednotka::patriPod(UzemnaJednotka* uJ) const
+{
+	
+	//cout << uJ->getKodUJ() << " " << this->getKodUJ() << endl;
+	if (this->getTypUzemnejJednotky() == OBEC)
+	{
+	
+		UzemnaJednotka* okres = kamPatrimJa_;
+		UzemnaJednotka* kraj = okres->getkamPatrimJa();
+		UzemnaJednotka* stat = kraj->getkamPatrimJa();
+		return okres->getKodUJ() == uJ->getKodUJ() || kraj->getKodUJ() == uJ->getKodUJ() || stat->getKodUJ() == uJ->getKodUJ();
+	}
+	if (this->getTypUzemnejJednotky() == OKRES)
+	{
+		
+		UzemnaJednotka* kraj = kamPatrimJa_;
+		UzemnaJednotka* stat = kraj->getkamPatrimJa();
+		return kraj->getNazov() == uJ->getNazov() || stat->getNazov() == uJ->getNazov();
+	}
+	if (this->getTypUzemnejJednotky() == STAT)
+	{
+		return true;
+	}
+
+}
+
+string UzemnaJednotka::getNazov() const
 {
 	return nazov_;
 }
 
-TypUzemnejJednotky UzemnaJednotka::getTypUzemnejJednotky()
+TypUzemnejJednotky UzemnaJednotka::getTypUzemnejJednotky() const
 {
 	return typUzemnejJednotky_;
 }

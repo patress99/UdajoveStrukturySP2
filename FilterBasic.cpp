@@ -1,18 +1,18 @@
-#include "Filter.h"
+#include "FilterBasic.h"
 
-Filter::Filter() :
+FilterBasic::FilterBasic() :
 	roztried_(new Roztried())
 {
 	roztried_->roztriedUzemneJednotky();
 	roztried_->priradDataObciam();
 }
 
-Filter::~Filter()
+FilterBasic::~FilterBasic()
 {
 	delete roztried_;
 }
 
-void Filter::filtrujPodlaNazvu(string nazovObce)
+void FilterBasic::filtrujPodlaNazvu(string nazovObce)
 {
 	
 	if (!roztried_->getTabulkaVsetkehoPodlaNazvu().containsKey(nazovObce))
@@ -39,7 +39,7 @@ void Filter::filtrujPodlaNazvu(string nazovObce)
 	}
 }
 
-void Filter::filterVolici(int dolnaHranica, int hornaHranica)
+void FilterBasic::filterVolici(int dolnaHranica, int hornaHranica)
 {
 	for (TableItem<int, UzemnaJednotka*>* temp : roztried_->getTabulkaVsetkeho())
 	{
@@ -51,7 +51,7 @@ void Filter::filterVolici(int dolnaHranica, int hornaHranica)
 	}
 }
 
-void Filter::vypisPodlaNazvu()
+void FilterBasic::vypisPodlaNazvu()
 {
 	int i = 0;
 	for (TableItem<string, LinkedList<UzemnaJednotka*>*>* temp : roztried_->getTabulkaVsetkehoPodlaNazvu())

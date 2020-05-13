@@ -19,8 +19,8 @@ public:
 	SortedSequenceTable<int, UzemnaJednotka*> getTabulkaVsetkeho();
 	SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*> getTabulkaVsetkehoPodlaNazvu();
 	void najdiPodlaNazvu(string nazov);
-
-
+	void filterNajdiNazov(string nazov);
+	void patrim(string nazov);
 
 private:
 

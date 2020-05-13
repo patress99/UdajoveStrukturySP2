@@ -4,7 +4,9 @@
 #include <clocale>
 //#include "Roztried.h"
 #include "heap_monitor.h"
-#include "Filter.h"
+#include "FilterBasic.h"
+#include "Vyhladaj.h"
+
 
 using namespace structures;
 
@@ -21,14 +23,20 @@ int main()
 	setvbuf(stdout, nullptr, _IOFBF, 1000);
 
 	//spusti();
-
-	Filter* filter = new Filter();
-	filter->filtrujPodlaNazvu(u8"Selce");
-	//filter->filterVolici(89000, 91000);
+	/*Roztried* roz =  new Roztried();
+	roz->roztriedUzemneJednotky();
+	roz->priradDataObciam();
+	roz->patrim("kkt");*/
+	
+	Vyhladaj* hladacik = new Vyhladaj();
+	string nacitalSom = "Poltár";
+	hladacik->filtruj(u8"Lúèky" , u8"Banskobystrický kraj", OBEC);
+	////filter->filtrujPodlaNazvu(u8"Selce");
+	///filter->filterVolici(800, 1500);
 	//filter->vypisPodlaNazvu();
 	//filter->vypisPodlaNazvu();
-	//delete filter;
-
+	//delete hladacik;
+	delete hladacik;
 
 	return 0;
 };
@@ -56,7 +64,7 @@ void spusti()
 						string nazov;
 						cout << u8"Zadaj názov územnej jednotky, ktorú chceš vyhlada: " << endl;
 						cin  >> nazov;
-						Filter* f = new Filter();
+						FilterBasic* f = new FilterBasic();
 						f->filtrujPodlaNazvu(nazov);
 			
 					}

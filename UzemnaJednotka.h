@@ -17,18 +17,22 @@ public:
 	UzemnaJednotka(string nazov, TypUzemnejJednotky typ, UzemnaJednotka* kamPatrim);
 	~UzemnaJednotka();
 
-	string getNazov();
-	TypUzemnejJednotky getTypUzemnejJednotky();
+	string getNazov() const;
+	TypUzemnejJednotky getTypUzemnejJednotky() const;
 	SortedSequenceTable<int, UzemnaJednotka*>* getKtoPatriDoMna();
 	UzemnaJednotka* getkamPatrimJa();
-	void pridajPotomka(int key, UzemnaJednotka* uJ);
+	UzemnaJednotka* getUzemnaJednotka();
+	bool patriPod(UzemnaJednotka* uJ) const;
 
+	void pridajPotomka(int key, UzemnaJednotka* uJ);
+	void setKodUJ(int key);
+	int getKodUJ() const;
 
 	void setUcast(double ucast);
-	double getUcast();
+	double getUcast() const;
 
 	void setPocetZapisanychVolicov(int pocet);
-	int getPocetZapisanychVolicov();
+	int getPocetZapisanychVolicov() const;
 
 	void setPocetZucastnenych(int pocet);
 	int getPocetZUcastnenych();
@@ -41,8 +45,9 @@ private:
 	SortedSequenceTable<int, UzemnaJednotka*>* ktoPatriDoMna_;
 	UzemnaJednotka* kamPatrimJa_;
 	TypUzemnejJednotky typUzemnejJednotky_;
-	double kodObce_, pocet_zap_volicov_, pocet_zuc_volicov_;
+	double  pocet_zap_volicov_, pocet_zuc_volicov_;
 	double ucast_;
+	int kodUJ_;
 
 
 
