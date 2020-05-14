@@ -62,7 +62,10 @@
     <ClCompile Include="Informacia.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
-    <ClCompile Include="Filter.cpp">
+    <ClCompile Include="FilterBasic.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vyhladaj.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -130,11 +133,20 @@
     <ClInclude Include="Informacia.h">
       <Filter>HeaderFiles</Filter>
     </ClInclude>
+    <ClInclude Include="linked_list.h">
+      <Filter>structures\list</Filter>
+    </ClInclude>
+    <ClInclude Include="FilterBasic.h">
+      <Filter>HeaderFiles</Filter>
+    </ClInclude>
     <ClInclude Include="Filter.h">
       <Filter>HeaderFiles</Filter>
     </ClInclude>
-    <ClInclude Include="linked_list.h">
-      <Filter>structures\list</Filter>
+    <ClInclude Include="Kriterium.h">
+      <Filter>HeaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Vyhladaj.h">
+      <Filter>HeaderFiles</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

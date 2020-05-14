@@ -147,11 +147,12 @@
     <ClCompile Include="ds_structure_factory.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Roztried.cpp" />
-    <ClCompile Include="Filter.cpp" />
+    <ClCompile Include="FilterBasic.cpp" />
     <ClCompile Include="structure.cpp" />
     <ClCompile Include="Informacia.cpp" />
     <ClCompile Include="UzemnaJednotka.cpp" />
     <ClCompile Include="vector.cpp" />
+    <ClCompile Include="Vyhladaj.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="array.h" />
@@ -161,7 +162,9 @@
     <ClInclude Include="ds_structure_factory.h" />
     <ClInclude Include="ds_structure_types.h" />
     <ClInclude Include="Filter.h" />
+    <ClInclude Include="FilterBasic.h" />
     <ClInclude Include="heap_monitor.h" />
+    <ClInclude Include="Kriterium.h" />
     <ClInclude Include="k_way_tree.h" />
     <ClInclude Include="linked_list.h" />
     <ClInclude Include="list.h" />
@@ -177,6 +180,7 @@
     <ClInclude Include="unsorted_sequence_table.h" />
     <ClInclude Include="UzemnaJednotka.h" />
     <ClInclude Include="vector.h" />
+    <ClInclude Include="Vyhladaj.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

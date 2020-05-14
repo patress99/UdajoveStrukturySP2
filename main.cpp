@@ -29,8 +29,12 @@ int main()
 	roz->patrim("kkt");*/
 	
 	Vyhladaj* hladacik = new Vyhladaj();
-	string nacitalSom = "Poltár";
-	hladacik->filtruj(u8"Lúèky" , u8"Banskobystrický kraj", OBEC);
+	
+	hladacik->uloha3a(u8"Žiar nad Hronom" , u8"Banskobystrický kraj", OKRES);
+	
+	//hladacik->uloha3b(60000, 92000, u8"Banskobystrický kraj", OBEC);
+	//hladacik->uloha3c(89.2, 92.0, u8"Slovensko", OBEC);
+		
 	////filter->filtrujPodlaNazvu(u8"Selce");
 	///filter->filterVolici(800, 1500);
 	//filter->vypisPodlaNazvu();

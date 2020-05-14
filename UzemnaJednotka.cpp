@@ -14,6 +14,7 @@ UzemnaJednotka::~UzemnaJednotka()
 	if (this->ktoPatriDoMna_ != nullptr)
 	{
 		delete this->ktoPatriDoMna_;
+		this->ktoPatriDoMna_ = nullptr;
 	}
 }
 
@@ -89,6 +90,11 @@ UzemnaJednotka* UzemnaJednotka::getkamPatrimJa()
 
 }
 
+void UzemnaJednotka::vymaz()
+{
+	delete this;
+}
+
 bool UzemnaJednotka::patriPod(UzemnaJednotka* uJ) const
 {
 	
@@ -108,6 +114,14 @@ bool UzemnaJednotka::patriPod(UzemnaJednotka* uJ) const
 		UzemnaJednotka* stat = kraj->getkamPatrimJa();
 		return kraj->getNazov() == uJ->getNazov() || stat->getNazov() == uJ->getNazov();
 	}
+
+	if (this->getTypUzemnejJednotky() == KRAJ)
+	{
+
+		UzemnaJednotka* stat = kamPatrimJa_;
+		return stat->getNazov() == uJ->getNazov();
+	}
+
 	if (this->getTypUzemnejJednotky() == STAT)
 	{
 		return true;

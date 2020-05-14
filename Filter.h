@@ -73,11 +73,13 @@ public:
 	FilterNazov(){};
 	~FilterNazov(){};
 
-	SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*> vyfiltrujNazov(SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*> tabulkaNaFiltrovanie)
+	SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*> vyfiltrujNazov(SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*> tabulkaNaFiltrovanie, bool vypis, SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>* vyfiltrovanaTabulka)
 	{
 		KriteriumNazov* kriterium = new KriteriumNazov();
-		SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>* pridavanaUJ = new SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>();
-		
+		//SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>* vyfiltrovanaTabulka = new SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>();
+		LinkedList<UzemnaJednotka*>* result = new LinkedList<UzemnaJednotka*>();		
+		cout << this->alpha_ << " " << tabulkaNaFiltrovanie.size() << endl;
+
 		LinkedList<UzemnaJednotka*>* uJ = tabulkaNaFiltrovanie.operator[](this->alpha_);
 
 		for (size_t i = 0; i < uJ->size(); i++)
@@ -85,16 +87,19 @@ public:
 			UzemnaJednotka* filtrovanaUJ = (*uJ)[i];
 			if (this->ohodnot(*filtrovanaUJ, *kriterium))
 			{
-				cout << " Filter nazov: " << filtrovanaUJ->getNazov() << " " << filtrovanaUJ->getkamPatrimJa()->getNazov() << endl;				
-			}
-			else
-			{
-				uJ->removeAt(i);
+				if (vypis)				
+				{ 
+					cout << " Filter nazov: " << filtrovanaUJ->getNazov() << " " << filtrovanaUJ->getkamPatrimJa()->getNazov() << endl;		
+					result->add(filtrovanaUJ);
+				}
+				else			
+					result->add(filtrovanaUJ);
 			}
 		}
-		pridavanaUJ->insert(this->alpha_, uJ);		
+
+		vyfiltrovanaTabulka->insert(this->alpha_, result);		
 		delete kriterium;
-		return *pridavanaUJ;
+		return *vyfiltrovanaTabulka;
 	};
 	
 };
@@ -106,19 +111,29 @@ class FilterUcast : public Filter_FI<UzemnaJednotka, double>
 		FilterUcast(){};
 		~FilterUcast() {};
 
-		SortedSequenceTable<int, UzemnaJednotka*> vyfiltrujUcast(SortedSequenceTable<int, UzemnaJednotka*> tabulkaNaFiltrovanie)
+		SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*> vyfiltrujUcast(SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*> tabulkaNaFiltrovanie)
 		{
 			KriteriumUcast* kriterium = new KriteriumUcast();
-			SortedSequenceTable<int, UzemnaJednotka*>* pridavanaUj = new SortedSequenceTable<int, UzemnaJednotka*>();
+			SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>* pridavanaUj = new SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>();
+			LinkedList<UzemnaJednotka*>* result = new LinkedList<UzemnaJednotka*>();
+
+			string nazov;
 			for (const auto& temp : tabulkaNaFiltrovanie)
 			{
-				if (this->ohodnot(*temp->accessData(), *kriterium))
+				for (size_t i = 0; i < temp->accessData()->size(); i++)
 				{
-					cout << temp->accessData()->getNazov() << " " << temp->accessData()->getkamPatrimJa()->getNazov() << " " << temp->accessData()->getPocetZapisanychVolicov() << endl;
-					pridavanaUj->insert(temp->getKey(), temp->accessData());
+					UzemnaJednotka* filtrovanaUJ = temp->accessData()->operator[](i);
+					if (this->ohodnot(*filtrovanaUJ, *kriterium))
+					{
+						cout << filtrovanaUJ->getNazov() << " " << filtrovanaUJ->getkamPatrimJa()->getNazov() << " " << filtrovanaUJ->getUcast() << endl;
+						result->add(filtrovanaUJ);
+						nazov = filtrovanaUJ->getNazov();
+					}
+
 				}
 
 			}
+			pridavanaUj->insert(nazov, result);
 			return *pridavanaUj;
 		};
 };
@@ -129,20 +144,37 @@ public:
 	FilterVolici() {};
 	~FilterVolici() {};
 
-	SortedSequenceTable<int, UzemnaJednotka*> vyfiltrujVolicov(SortedSequenceTable<int, UzemnaJednotka*> tabulkaNaFiltrovanie)
+	SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*> vyfiltrujVolicov(SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*> tabulkaNaFiltrovanie, bool vypis)
 	{
 		KriteriumVolici* kriterium = new KriteriumVolici();
-		SortedSequenceTable<int, UzemnaJednotka*>* pridavanaUj = new SortedSequenceTable<int, UzemnaJednotka*>();
+		SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>* pridavanaUj = new SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>();
+		LinkedList<UzemnaJednotka*> *result = new LinkedList<UzemnaJednotka*>();
 
+
+		string nazov;
 		for (const auto& temp : tabulkaNaFiltrovanie)
 		{
-			if (this->ohodnot(*temp->accessData(), *kriterium))
+			for (size_t i = 0; i < temp->accessData()->size(); i++)
 			{
-				cout << temp->accessData()->getNazov() << " " << temp->accessData()->getkamPatrimJa()->getNazov() << " " << temp->accessData()->getPocetZapisanychVolicov() << endl;
-				pridavanaUj->insert(temp->getKey(), temp->accessData());
+				UzemnaJednotka* filtrovanaUJ = temp->accessData()->operator[](i);
+				if (this->ohodnot(*filtrovanaUJ, *kriterium))
+				{
+					if (vypis)
+					{
+						cout << temp->accessData()->operator[](i)->getNazov() << " " << temp->accessData()->operator[](i)->getkamPatrimJa()->getNazov() << " " << temp->accessData()->operator[](i)->getPocetZapisanychVolicov() << endl;
+
+					}
+					else
+					{
+						nazov = temp->accessData()->operator[](i)->getNazov();
+						result->add(filtrovanaUJ);
+					}
+
+				}
 			}
 
 		}
+		pridavanaUj->insert(nazov, result);
 		return *pridavanaUj;
 	};
 };
@@ -164,26 +196,48 @@ public:
 		this->kriterium_->setUJ(uJ);
 	}
 
-	SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*> vyfiltrujPrislusnost(SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*> tabulkaNaFiltrovanie, string nazov)	
+	SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*> vyfiltrujPrislusnost(SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*> tabulkaNaFiltrovanie, bool vypis, SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>* pridavanaUJ)
 	{
-		SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>* pridavanaUJ = new SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>();	
-		LinkedList<UzemnaJednotka*>* pridavanyList = new LinkedList<UzemnaJednotka*>();
-
-		LinkedList<UzemnaJednotka*>* uJ = tabulkaNaFiltrovanie.operator[](nazov);;
+	//	SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>* pridavanaUJ = new SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>();	
 		LinkedList<UzemnaJednotka*>* result = nullptr;
-
-		for (size_t i = 0; i < uJ->size(); i++)
-		{			
-			
-			UzemnaJednotka* filtrovanaUJ = (*uJ)[i];			
-			if (this->ohodnot(*filtrovanaUJ, *kriterium_))
+		pridavanaUJ->clear();
+		string nazov;
+		int pocitadlo = 0;
+		for (auto temp : tabulkaNaFiltrovanie)
+		{
+			for (size_t i = 0; i < temp->accessData()->size(); i++)
 			{
-				cout << "Filter prislusnosti : " << filtrovanaUJ->getNazov() << " " << filtrovanaUJ->getkamPatrimJa()->getNazov() << endl;
-				pridavanyList->add(filtrovanaUJ);
+				UzemnaJednotka* filtrovanaUJ = temp->accessData()->operator[](i);
+
+				if (this->ohodnot(*filtrovanaUJ, *kriterium_))
+				{
+					if(vypis)
+					cout << "Filter prislusnosti : " << filtrovanaUJ->getNazov() << " " << filtrovanaUJ->getkamPatrimJa()->getNazov() << endl;
+					else
+					{ 
+						nazov = temp->accessData()->operator[](i)->getNazov();
+						if (!pridavanaUJ->containsKey(nazov))
+						{
+							result = new LinkedList<UzemnaJednotka*>();
+							//cout << pocitadlo++ << endl;
+							//cout << filtrovanaUJ->getNazov() << endl;
+							result->add(filtrovanaUJ);
+							pridavanaUJ->insert(nazov, result);
+						}
+						else
+						{
+							result = pridavanaUJ->operator[](nazov);
+							//cout << pocitadlo++ << endl;
+
+							//cout << filtrovanaUJ->getNazov() << endl;
+							result->add(filtrovanaUJ);
+						}
+					}
+				}
 			}
-			
+		
 		}
-		pridavanaUJ->insert(nazov, pridavanyList);
+		
 		return *pridavanaUJ;
 	};
 
@@ -198,25 +252,45 @@ public:
 	{};
 	~FilterTypUzemnaJednotka() {};
 
-	SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*> vyfiltrujTypUzemnejJednotky(SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*> tabulkaNaFiltrovanie, string nazovUJ)
+	SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*> vyfiltrujTypUzemnejJednotky(SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*> tabulkaNaFiltrovanie, bool vypis, SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>* pridavanaUJ)
 
 	{
-		SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>* pridavanaUJ = new SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>();		
-		LinkedList<UzemnaJednotka*>* uJ = tabulkaNaFiltrovanie.operator[](nazovUJ);
-		LinkedList<UzemnaJednotka*>* result = new LinkedList<UzemnaJednotka*>();
+		LinkedList<UzemnaJednotka*>* result = nullptr;
 		KriteriumTyp* kriterium = new KriteriumTyp();		
-			for (size_t i = 0; i < uJ->size(); i++)
-			{			
-				UzemnaJednotka* filtrovanaUJ = (*uJ)[i];
-
+		string nazov;
+		for (auto temp : tabulkaNaFiltrovanie )
+		{
+			for (size_t i = 0; i < temp->accessData()->size(); i++)
+			{
+				UzemnaJednotka* filtrovanaUJ = temp->accessData()->operator[](i);
 				if (this->ohodnot(*filtrovanaUJ, *kriterium))
 				{
-					cout << "Filter typ : " << filtrovanaUJ->getNazov() << " " << filtrovanaUJ->getkamPatrimJa()->getNazov() << endl;			
-					result->add(filtrovanaUJ);
-				}
-			}
+					if (vypis)
+					{
+						cout << "Filter typ : " << filtrovanaUJ->getNazov() << " " << filtrovanaUJ->getkamPatrimJa()->getNazov() << endl;
+					}
+					else
+					{
+						nazov = temp->accessData()->operator[](i)->getNazov();
+						if (!pridavanaUJ->containsKey(nazov))
+						{
+							result = new LinkedList<UzemnaJednotka*>();
+							result->add(filtrovanaUJ);
+							pridavanaUJ->insert(nazov, result);
+						}
+						else
+						{
+							result = pridavanaUJ->operator[](nazov);
+							result->add(filtrovanaUJ);
 
-		pridavanaUJ->insert(nazovUJ, result);
+						}
+					
+					}
+
+				}
+			}			
+		}
+
 		delete kriterium;
 		return *pridavanaUJ;
 	};

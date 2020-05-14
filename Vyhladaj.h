@@ -8,8 +8,12 @@ public:
 	Vyhladaj();
 	~Vyhladaj();
 
-	void filtruj(std::string nazov, std::string nazovPrislusnosti, TypUzemnejJednotky typ);
-	void clear(SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*> tabulkaNaZmazanie);
+	SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>* filterTypAPrislusnost(TypUzemnejJednotky typ, string nazovPrislusnosti);
+	void uloha3a(std::string nazov, std::string nazovPrislusnosti, TypUzemnejJednotky typ);
+	void uloha3b(int dolnaH, int hornaH, std::string nazovPrislusnosti, TypUzemnejJednotky typ);
+	void uloha3c(double dolnaH, double hornaH, std::string nazovPrislusnosti, TypUzemnejJednotky typ);
+
+	void clear(SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>* tabulkaNaZmazanie);
 private:
 	Roztried* roztried_;
 };

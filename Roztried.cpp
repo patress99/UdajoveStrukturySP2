@@ -20,6 +20,7 @@ Roztried::~Roztried()
 	}
 	this->tabulkaVsetkehoPodlaNazvu_->clear();
 	delete this->tabulkaVsetkehoPodlaNazvu_;
+	this->tabulkaVsetkehoPodlaNazvu_ = nullptr;
 
 
 
@@ -34,7 +35,9 @@ Roztried::~Roztried()
 			}
 
 		}
+		this->tabulkaVsetkeho_->clear();
 		delete this->tabulkaVsetkeho_;
+		this->tabulkaVsetkeho_ = nullptr;
 	}
 
 	
@@ -131,8 +134,6 @@ void Roztried::roztriedUzemneJednotky()
 				else
 				{
 					
-				/*	cout << pocokresy++ << endl;
-					cout << nazovOkresu << endl;*/
 					LinkedList<UzemnaJednotka*>* zretazenieOkresov = new LinkedList<UzemnaJednotka*>();
 					zretazenieOkresov->add(novyOkres);
 					this->tabulkaVsetkehoPodlaNazvu_->insert(nazovOkresu, zretazenieOkresov);

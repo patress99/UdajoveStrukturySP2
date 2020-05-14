@@ -21,7 +21,7 @@ public:
 	TypUzemnejJednotky getTypUzemnejJednotky() const;
 	SortedSequenceTable<int, UzemnaJednotka*>* getKtoPatriDoMna();
 	UzemnaJednotka* getkamPatrimJa();
-	UzemnaJednotka* getUzemnaJednotka();
+	void vymaz();
 	bool patriPod(UzemnaJednotka* uJ) const;
 
 	void pridajPotomka(int key, UzemnaJednotka* uJ);
