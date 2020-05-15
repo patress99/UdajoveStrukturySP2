@@ -1,6 +1,9 @@
 #pragma once
 #include "Filter.h"
 #include "Roztried.h"
+#include "unsorted_sequence_table.h"
+#include "quick_sort.h"
+#include "Kriterium.h"
 
 class Vyhladaj
 {
@@ -13,7 +16,7 @@ public:
 	void uloha3b(int dolnaH, int hornaH, std::string nazovPrislusnosti, TypUzemnejJednotky typ);
 	void uloha3c(double dolnaH, double hornaH, std::string nazovPrislusnosti, TypUzemnejJednotky typ);
 
-	void clear(SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>* tabulkaNaZmazanie);
+	void clear(SequenceTable<string, LinkedList<UzemnaJednotka*>*>* tabulkaNaZmazanie);
 private:
 	Roztried* roztried_;
 };

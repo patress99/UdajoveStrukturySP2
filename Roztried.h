@@ -16,16 +16,16 @@ public:
 
 	void roztriedUzemneJednotky();
 	void priradDataObciam();
-	SortedSequenceTable<int, UzemnaJednotka*> getTabulkaVsetkeho();
-	SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*> getTabulkaVsetkehoPodlaNazvu();
+	SequenceTable<int, UzemnaJednotka*>* getTabulkaVsetkeho();
+	SequenceTable<string, LinkedList<UzemnaJednotka*>*>* getTabulkaVsetkehoPodlaNazvu();
 	void najdiPodlaNazvu(string nazov);
 	void filterNajdiNazov(string nazov);
 	void patrim(string nazov);
 
 private:
 
-	SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>* tabulkaVsetkehoPodlaNazvu_;
-	SortedSequenceTable<int, UzemnaJednotka*>* tabulkaVsetkeho_;
+	SequenceTable<string, LinkedList<UzemnaJednotka*>*>* tabulkaVsetkehoPodlaNazvu_;
+	SequenceTable<int, UzemnaJednotka*>* tabulkaVsetkeho_;
 	UzemnaJednotka* stat;
 
 

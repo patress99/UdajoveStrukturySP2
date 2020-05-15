@@ -15,14 +15,14 @@ FilterBasic::~FilterBasic()
 void FilterBasic::filtrujPodlaNazvu(string nazovObce)
 {
 	
-	if (!roztried_->getTabulkaVsetkehoPodlaNazvu().containsKey(nazovObce))
+	if (!(*roztried_).getTabulkaVsetkehoPodlaNazvu()->containsKey(nazovObce))
 	{
 		cout << "Zadany nazov neexistuje" << endl;
 
 	}
 	else
 	{
-		LinkedList<UzemnaJednotka*>* uj = roztried_->getTabulkaVsetkehoPodlaNazvu().operator[](nazovObce);
+		LinkedList<UzemnaJednotka*>* uj = (*roztried_).getTabulkaVsetkehoPodlaNazvu()->operator[](nazovObce);
 		for (size_t i = 0; i < uj->size(); i++)
 		{
 			if ((*uj)[i]->getkamPatrimJa() != nullptr)
@@ -41,7 +41,7 @@ void FilterBasic::filtrujPodlaNazvu(string nazovObce)
 
 void FilterBasic::filterVolici(int dolnaHranica, int hornaHranica)
 {
-	for (TableItem<int, UzemnaJednotka*>* temp : roztried_->getTabulkaVsetkeho())
+	for (TableItem<int, UzemnaJednotka*>* temp : *roztried_->getTabulkaVsetkeho())
 	{
 		if (temp->accessData()->getPocetZapisanychVolicov() >= dolnaHranica && temp->accessData()->getPocetZapisanychVolicov() <= hornaHranica)
 		{
@@ -54,7 +54,7 @@ void FilterBasic::filterVolici(int dolnaHranica, int hornaHranica)
 void FilterBasic::vypisPodlaNazvu()
 {
 	int i = 0;
-	for (TableItem<string, LinkedList<UzemnaJednotka*>*>* temp : roztried_->getTabulkaVsetkehoPodlaNazvu())
+	for (TableItem<string, LinkedList<UzemnaJednotka*>*>* temp : *roztried_->getTabulkaVsetkehoPodlaNazvu())
 	{
 		for (size_t i = 0; i < temp->accessData()->size(); i++)
 		{

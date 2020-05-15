@@ -27,14 +27,23 @@ Roztried::~Roztried()
 
 	if (!this->tabulkaVsetkeho_->isEmpty())
 	{
-		for (size_t i = 0; i < this->tabulkaVsetkeho_->size(); i++)
+
+		for (auto temp : *this->tabulkaVsetkeho_)
+		{
+			if (temp->accessData() != nullptr)
+			{
+				delete temp->accessData();
+			}
+
+		}
+		/*for (size_t i = 0; i < this->tabulkaVsetkeho_->size(); i++)
 		{
 			if (this->tabulkaVsetkeho_->getItemAtIndex(i).accessData() != nullptr)
 			{
 				delete this->tabulkaVsetkeho_->getItemAtIndex(i).accessData();
 			}
 
-		}
+		}*/
 		this->tabulkaVsetkeho_->clear();
 		delete this->tabulkaVsetkeho_;
 		this->tabulkaVsetkeho_ = nullptr;
@@ -287,14 +296,14 @@ void Roztried::priradDataObciam()
 }
 
 
-SortedSequenceTable<int, UzemnaJednotka*> Roztried::getTabulkaVsetkeho()
+SequenceTable<int, UzemnaJednotka*>* Roztried::getTabulkaVsetkeho()
 {
-	return *this->tabulkaVsetkeho_;
+	return this->tabulkaVsetkeho_;
 }
 
-SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*> Roztried::getTabulkaVsetkehoPodlaNazvu()
+SequenceTable<string, LinkedList<UzemnaJednotka*>*>* Roztried::getTabulkaVsetkehoPodlaNazvu()
 {
-	return *this->tabulkaVsetkehoPodlaNazvu_;
+	return this->tabulkaVsetkehoPodlaNazvu_;
 }
 
 void Roztried::najdiPodlaNazvu(string nazov)

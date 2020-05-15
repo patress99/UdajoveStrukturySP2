@@ -78,9 +78,21 @@ public:
 		KriteriumNazov* kriterium = new KriteriumNazov();
 		//SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>* vyfiltrovanaTabulka = new SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>();
 		LinkedList<UzemnaJednotka*>* result = new LinkedList<UzemnaJednotka*>();		
-		cout << this->alpha_ << " " << tabulkaNaFiltrovanie.size() << endl;
+	//	cout << this->alpha_ << " " << tabulkaNaFiltrovanie.size() << endl;
 
-		LinkedList<UzemnaJednotka*>* uJ = tabulkaNaFiltrovanie.operator[](this->alpha_);
+		LinkedList<UzemnaJednotka*>* uJ;
+		if (tabulkaNaFiltrovanie.containsKey(this->alpha_))
+		{
+			uJ = tabulkaNaFiltrovanie.operator[](this->alpha_);
+		}
+		else
+		{
+			cout << u8"Žiadny výsledok" <<endl;
+			delete kriterium;
+			delete result;
+			return tabulkaNaFiltrovanie;
+		}
+		
 
 		for (size_t i = 0; i < uJ->size(); i++)
 		{
@@ -196,14 +208,18 @@ public:
 		this->kriterium_->setUJ(uJ);
 	}
 
-	SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*> vyfiltrujPrislusnost(SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*> tabulkaNaFiltrovanie, bool vypis, SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>* pridavanaUJ)
+	SequenceTable<string, LinkedList<UzemnaJednotka*>*>* vyfiltrujPrislusnost(SequenceTable<string, LinkedList<UzemnaJednotka*>*>* tabulkaNaFiltrovanie, bool vypis, SequenceTable<string, LinkedList<UzemnaJednotka*>*>* pridavanaUJ)
 	{
 	//	SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>* pridavanaUJ = new SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>();	
 		LinkedList<UzemnaJednotka*>* result = nullptr;
 		pridavanaUJ->clear();
 		string nazov;
 		int pocitadlo = 0;
-		for (auto temp : tabulkaNaFiltrovanie)
+
+
+
+
+		for (auto temp : *tabulkaNaFiltrovanie)
 		{
 			for (size_t i = 0; i < temp->accessData()->size(); i++)
 			{
@@ -238,7 +254,7 @@ public:
 		
 		}
 		
-		return *pridavanaUJ;
+		return pridavanaUJ;
 	};
 
 
@@ -252,13 +268,13 @@ public:
 	{};
 	~FilterTypUzemnaJednotka() {};
 
-	SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*> vyfiltrujTypUzemnejJednotky(SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*> tabulkaNaFiltrovanie, bool vypis, SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>* pridavanaUJ)
+	SequenceTable<string, LinkedList<UzemnaJednotka*>*>* vyfiltrujTypUzemnejJednotky(SequenceTable<string, LinkedList<UzemnaJednotka*>*>* tabulkaNaFiltrovanie, bool vypis, SequenceTable<string, LinkedList<UzemnaJednotka*>*>* pridavanaUJ)
 
 	{
 		LinkedList<UzemnaJednotka*>* result = nullptr;
 		KriteriumTyp* kriterium = new KriteriumTyp();		
 		string nazov;
-		for (auto temp : tabulkaNaFiltrovanie )
+		for (auto temp : *tabulkaNaFiltrovanie )
 		{
 			for (size_t i = 0; i < temp->accessData()->size(); i++)
 			{
@@ -292,7 +308,7 @@ public:
 		}
 
 		delete kriterium;
-		return *pridavanaUJ;
+		return pridavanaUJ;
 	};
 
 

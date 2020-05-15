@@ -14,20 +14,23 @@ Vyhladaj::~Vyhladaj()
 
 void Vyhladaj::uloha3a(std::string nazov, std::string nazovPrislusnosti, TypUzemnejJednotky typ)
 {
-	SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>* poNazvoch = new SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>();
-	SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>* poPrislusnosti = new SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>();
-	SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>* vysledok = new SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>();
+	SequenceTable<string, LinkedList<UzemnaJednotka*>*>* poNazvoch = new SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>();
+	SequenceTable<string, LinkedList<UzemnaJednotka*>*>* poPrislusnosti = new SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>();
+	SequenceTable<string, LinkedList<UzemnaJednotka*>*>* vysledok = new SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>();
 	//SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>* vysledok = new SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>();
-	SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*> zaciatocnaTabulka = roztried_->getTabulkaVsetkehoPodlaNazvu();
+	SequenceTable<string, LinkedList<UzemnaJednotka*>*>* zaciatocnaTabulka = roztried_->getTabulkaVsetkehoPodlaNazvu();
+
+	SequenceTable<int, UzemnaJednotka*>* tabulkaNaZoradenie = new UnsortedSequenceTable<int, UzemnaJednotka*>();
+
 
 	FilterTypUzemnaJednotka* fTyp = new FilterTypUzemnaJednotka();
 	fTyp->setAlpha(typ);
-	LinkedList<UzemnaJednotka*>* list = roztried_->getTabulkaVsetkehoPodlaNazvu().operator[](nazovPrislusnosti);
+	LinkedList<UzemnaJednotka*>* list = (*roztried_).getTabulkaVsetkehoPodlaNazvu()->operator[](nazovPrislusnosti);
 	FilterNazov* fNazov = new FilterNazov();
 	
 
 
-	*vysledok = fTyp->vyfiltrujTypUzemnejJednotky(zaciatocnaTabulka, false, vysledok);
+	vysledok = fTyp->vyfiltrujTypUzemnejJednotky(zaciatocnaTabulka, false, vysledok);
 	for (size_t i = 0; i < list->size(); i++)
 	{
 		UzemnaJednotka* uJ = (*list)[i];
@@ -36,20 +39,28 @@ void Vyhladaj::uloha3a(std::string nazov, std::string nazovPrislusnosti, TypUzem
 			//cout << uJ->getkamPatrimJa()->getTypUzemnejJednotky() << endl;
 			FilterPrislusnost* prislusnost = new FilterPrislusnost(uJ);
 			prislusnost->setAlpha(true);
-			*poPrislusnosti = prislusnost->vyfiltrujPrislusnost(*vysledok, false, poPrislusnosti);
+			poPrislusnosti = prislusnost->vyfiltrujPrislusnost(vysledok, false, poPrislusnosti);
 			delete prislusnost;
 		}
 	}
 
+	Kriterium<UzemnaJednotka, std::string> *kNaz = new KriteriumNazov();
+	
 	for (auto temp : *poPrislusnosti)
 	{
 		for (size_t i = 0; i < temp->accessData()->size(); i++)
 		{
+			int kod = temp->accessData()->operator[](i)->getKodUJ();
+			tabulkaNaZoradenie->insert(kod, temp->accessData()->operator[](i));
 			cout << temp->accessData()->operator[](i)->getNazov() << endl;
 		}
 	}
+	cout << tabulkaNaZoradenie->size() << endl;
 
-	cout << poPrislusnosti->size() << endl;
+	Kriterium<UzemnaJednotka, std::string>* kNaz = new KriteriumNazov();
+	QuickSort<int, UzemnaJednotka*> sort ;
+	sort.sortik(*tabulkaNaZoradenie, *kNaz, true);
+	//cout << poPrislusnosti->size() << endl;
 	fNazov->setAlpha(nazov);
 	//*poNazvoch = fNazov->vyfiltrujNazov(*poPrislusnosti, true, poNazvoch);
 
@@ -111,7 +122,7 @@ void Vyhladaj::uloha3c(double dolnaH, double hornaH, std::string nazovPrislusnos
 
 }
 */
-void Vyhladaj::clear(SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>* tabulkaNaZmazanie)
+void Vyhladaj::clear(SequenceTable<string, LinkedList<UzemnaJednotka*>*>* tabulkaNaZmazanie)
 {
 	for (const auto& temp : *tabulkaNaZmazanie)
 	{			

@@ -30,7 +30,7 @@ int main()
 	
 	Vyhladaj* hladacik = new Vyhladaj();
 	
-	hladacik->uloha3a(u8"Žiar nad Hronom" , u8"Banskobystrický kraj", OKRES);
+	hladacik->uloha3a(u8"Zvolen" , u8"Zvolen", OBEC);
 	
 	//hladacik->uloha3b(60000, 92000, u8"Banskobystrický kraj", OBEC);
 	//hladacik->uloha3c(89.2, 92.0, u8"Slovensko", OBEC);
