@@ -1,5 +1,5 @@
 #include "Vyhladaj.h"
-
+#include "array_list.h"
 Vyhladaj::Vyhladaj() :
 	roztried_(new Roztried())
 {
@@ -13,122 +13,101 @@ Vyhladaj::~Vyhladaj()
 }
 
 void Vyhladaj::uloha3a(std::string nazov, std::string nazovPrislusnosti, TypUzemnejJednotky typ)
-{
-	SequenceTable<string, LinkedList<UzemnaJednotka*>*>* poNazvoch = new SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>();
-	SequenceTable<string, LinkedList<UzemnaJednotka*>*>* poPrislusnosti = new SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>();
-	SequenceTable<string, LinkedList<UzemnaJednotka*>*>* vysledok = new SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>();
-	//SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>* vysledok = new SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*>();
+	{
 	SequenceTable<string, LinkedList<UzemnaJednotka*>*>* zaciatocnaTabulka = roztried_->getTabulkaVsetkehoPodlaNazvu();
+	//UnsortedSequenceTable<int, UzemnaJednotka*>* tabulkaNaZoradenie = new UnsortedSequenceTable<int, UzemnaJednotka*>();
+	FilterVolici* fUc = new FilterVolici();
+	fUc->setDolnaHranica(0);
+	fUc->setHornaHranica(60);
+	zaciatocnaTabulka = fUc->vyfiltrujVolicov(zaciatocnaTabulka, false);
+	FilterPrislusnost* prislusnost = nullptr;
 
-	SequenceTable<int, UzemnaJednotka*>* tabulkaNaZoradenie = new UnsortedSequenceTable<int, UzemnaJednotka*>();
+	LinkedList<UzemnaJednotka*>* list = (*roztried_).getTabulkaVsetkehoPodlaNazvu()->operator[](nazovPrislusnosti);
 
+	
 
 	FilterTypUzemnaJednotka* fTyp = new FilterTypUzemnaJednotka();
 	fTyp->setAlpha(typ);
-	LinkedList<UzemnaJednotka*>* list = (*roztried_).getTabulkaVsetkehoPodlaNazvu()->operator[](nazovPrislusnosti);
 	FilterNazov* fNazov = new FilterNazov();
 	
-
-
-	vysledok = fTyp->vyfiltrujTypUzemnejJednotky(zaciatocnaTabulka, false, vysledok);
+	zaciatocnaTabulka = fTyp->vyfiltrujTypUzemnejJednotky(zaciatocnaTabulka, false);
+	
 	for (size_t i = 0; i < list->size(); i++)
 	{
 		UzemnaJednotka* uJ = (*list)[i];
 		if (uJ->getTypUzemnejJednotky() != typ)
 		{
-			//cout << uJ->getkamPatrimJa()->getTypUzemnejJednotky() << endl;
-			FilterPrislusnost* prislusnost = new FilterPrislusnost(uJ);
+			prislusnost = new FilterPrislusnost(uJ);
 			prislusnost->setAlpha(true);
-			poPrislusnosti = prislusnost->vyfiltrujPrislusnost(vysledok, false, poPrislusnosti);
-			delete prislusnost;
+			zaciatocnaTabulka = prislusnost->vyfiltrujPrislusnost(zaciatocnaTabulka, false);
+
+
 		}
 	}
 
-	Kriterium<UzemnaJednotka, std::string> *kNaz = new KriteriumNazov();
+	fNazov->setAlpha(nazov);
 	
-	for (auto temp : *poPrislusnosti)
+	zaciatocnaTabulka = fNazov->vyfiltrujNazov(zaciatocnaTabulka, true);
+	
+
+
+	for (auto temp : *zaciatocnaTabulka)
 	{
 		for (size_t i = 0; i < temp->accessData()->size(); i++)
 		{
 			int kod = temp->accessData()->operator[](i)->getKodUJ();
-			tabulkaNaZoradenie->insert(kod, temp->accessData()->operator[](i));
-			cout << temp->accessData()->operator[](i)->getNazov() << endl;
+		//	tabulkaNaZoradenie->insert(kod, temp->accessData()->operator[](i));
+			cout << temp->accessData()->operator[](i)->getNazov() << " " << temp->accessData()->operator[](i)->getUcast() << endl;
 		}
+	
+
 	}
-	cout << tabulkaNaZoradenie->size() << endl;
 
-	Kriterium<UzemnaJednotka, std::string>* kNaz = new KriteriumNazov();
-	QuickSort<int, UzemnaJednotka*> sort ;
-	sort.sortik(*tabulkaNaZoradenie, *kNaz, true);
-	//cout << poPrislusnosti->size() << endl;
-	fNazov->setAlpha(nazov);
-	//*poNazvoch = fNazov->vyfiltrujNazov(*poPrislusnosti, true, poNazvoch);
+	cout << endl;
 
-	this->clear(poNazvoch);
-	this->clear(poPrislusnosti);
-	this->clear(vysledok);
+	KriteriumUcast* kNaz = new KriteriumUcast();
+	//QuickSort<int, UzemnaJednotka*>* sort = new QuickSort<int, UzemnaJednotka*>;
+	//sort->sortSKriteriom(*tabulkaNaZoradenie, *kNaz, false);
 
+	/*for (auto temp : *tabulkaNaZoradenie)
+	{
+		cout << temp->accessData()->getNazov() << u8" úèas: " << temp->accessData()->getUcast() << endl;
+	}*/
+
+	
+	//delete fUc;
+ 	delete prislusnost;
+	delete fUc;
 	delete fNazov;
-	delete fTyp;
+	delete fTyp;	
+	delete kNaz;
 
+
+
+
+
+
+	//delete sort;
+
+
+	//cout << zaciatocnaTabulka->size() << endl;
+	
 }
 
-/*
-void Vyhladaj::uloha3b(int dolnaH, int hornaH, std::string nazovPrislusnosti, TypUzemnejJednotky typ)
-{
-	SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*> vratenaTabulka = roztried_->getTabulkaVsetkehoPodlaNazvu();
-	FilterTypUzemnaJednotka* fTyp = new FilterTypUzemnaJednotka();
-	fTyp->setAlpha(typ);
-	LinkedList<UzemnaJednotka*>* list = roztried_->getTabulkaVsetkehoPodlaNazvu().operator[](nazovPrislusnosti);
-	FilterVolici* fVol = new FilterVolici();
-	fVol->setDolnaHranica(dolnaH);
-	fVol->setHornaHranica(hornaH);
-	for (size_t i = 0; i < list->size(); i++)
-	{
-		UzemnaJednotka* uJ = (*list)[i];
-		FilterPrislusnost* prislusnost = new FilterPrislusnost(uJ);
-		prislusnost->setAlpha(true);		
-		vratenaTabulka = prislusnost->vyfiltrujPrislusnost(vratenaTabulka, false);
-		vratenaTabulka = fTyp->vyfiltrujTypUzemnejJednotky(vratenaTabulka, false);
-		vratenaTabulka = fVol->vyfiltrujVolicov(vratenaTabulka, true);
-		delete prislusnost;
-	}
-
-	if (vratenaTabulka.size() == 0)
-	{
-		cout << u8"Nenašiel sa žiadny výsledok! " << endl;
-	}
-}
-
-void Vyhladaj::uloha3c(double dolnaH, double hornaH, std::string nazovPrislusnosti, TypUzemnejJednotky typ)
-{
-	SortedSequenceTable<string, LinkedList<UzemnaJednotka*>*> vratenaTabulka = roztried_->getTabulkaVsetkehoPodlaNazvu();
-	FilterTypUzemnaJednotka* fTyp = new FilterTypUzemnaJednotka();
-	fTyp->setAlpha(typ);
-	LinkedList<UzemnaJednotka*>* list = roztried_->getTabulkaVsetkehoPodlaNazvu().operator[](nazovPrislusnosti);
-	FilterUcast* fUc = new FilterUcast();
-	fUc->setDolnaHranica(dolnaH);
-	fUc->setHornaHranica(hornaH);
-	for (size_t i = 0; i < list->size(); i++)
-	{
-		UzemnaJednotka* uJ = (*list)[i];
-		FilterPrislusnost* prislusnost = new FilterPrislusnost(uJ);
-		prislusnost->setAlpha(true);
-		vratenaTabulka = prislusnost->vyfiltrujPrislusnost(vratenaTabulka, false);
-		vratenaTabulka = fTyp->vyfiltrujTypUzemnejJednotky(vratenaTabulka, false);
-		vratenaTabulka = fUc->vyfiltrujUcast(vratenaTabulka);
-		delete prislusnost;
-	}
-
-}
-*/
 void Vyhladaj::clear(SequenceTable<string, LinkedList<UzemnaJednotka*>*>* tabulkaNaZmazanie)
-{
-	for (const auto& temp : *tabulkaNaZmazanie)
-	{			
-		string kluc = temp->getKey();
-		delete (*tabulkaNaZmazanie)[kluc];
+{	
+	if (tabulkaNaZmazanie->getBeginIterator() != nullptr)
+	{
+		for (const auto& temp : *tabulkaNaZmazanie)
+		{
+			string kluc = temp->getKey();
+			delete (*tabulkaNaZmazanie)[kluc];
+		}
+		tabulkaNaZmazanie->clear();
+		delete tabulkaNaZmazanie;
 	}
-	tabulkaNaZmazanie->clear();
-	delete tabulkaNaZmazanie;
+		
+		
+	
+	
 }
