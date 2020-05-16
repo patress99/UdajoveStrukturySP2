@@ -80,9 +80,12 @@ void UzemnaJednotka::splnaFilter(bool nastav)
 
 void UzemnaJednotka::vypis()
 {
+	cout << endl;
 	cout << u8"Úèas v %: " << this->ucastVPct() << u8", poèet zapísaných volièov: " << this->getPocetZapisanychVolicov() << u8", poèet zúèastnených volièov: " << this->getPocetZUcastnenych() << 
 	u8", poèet obálok odovzdaných osobne " << this->getPocetVolicovOsobne() << u8", z cudziny " << this->getPocetVolicovZCudziny() << u8", podiel platných hlasov: " <<
 	" " << this->podielPlatnychHlasov() << " " << endl;
+	cout << endl;
+	cout << endl;
 }
 
 

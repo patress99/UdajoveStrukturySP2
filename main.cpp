@@ -16,28 +16,23 @@ void spusti();
 
 int main()
 {
-	initHeapMonitor();
+	initHeapMonitor();/*
 	SetConsoleOutputCP(CP_UTF8);
-	SetConsoleCP(CP_UTF8);
-
-	/*wchar_t wstr[MAX_INPUT_LENGTH];
-	char mb_str[MAX_INPUT_LENGTH * 3 + 1];
-
-	unsigned long read;
-	void* con = GetStdHandle(STD_INPUT_HANDLE);
-
-	ReadConsole(con, wstr, MAX_INPUT_LENGTH, &read, NULL);
-
-	int size = WideCharToMultiByte(CP_UTF8, 0, wstr, read, mb_str, sizeof(mb_str), NULL, NULL);
-	mb_str[size] = 0;
-
-	std::printf("ENTERED: %s\n", mb_str);
-	string s = mb_str;*/
-
-	//Vyhladaj* hladacik = new Vyhladaj();	
-	//hladacik->setFilterNazov(true);
+	SetConsoleCP(CP_UTF8);*/
+	std::locale::global(locale("en_US.utf8"));
 	
-	spusti();
+	wstring s;
+	wcin >> s;
+	wcout << s;
+
+
+	//std::printf("ENTERED: %s\n", mb_str);
+
+//	Vyhladaj* hladacik = new Vyhladaj();	
+//	hladacik->setFilterNazov(true);
+	
+	//spusti();
+///	hladacik->uloha3a(s, "", OBEC, 0, 0, 0, 0);
 
 
 	return 0;
@@ -47,9 +42,10 @@ void spusti()
 {
 	Vyhladaj* hladacik = new Vyhladaj();
 	bool spravnyTyp = false;
+
 	while(spravnyTyp == false)
 	{	
-		char filter1, filter2, filter3, filter4, filter5, typUJ;
+		char filter1, filter2, filter3, filter4, filter5, typUJ, kriterium;
 		string prislusnost, nazovHladanejObce;
 		double dolnaHUcast = 0.0;
 		double hornaHUcast = 0.0;
@@ -123,10 +119,22 @@ void spusti()
 			cin >> nazovHladanejObce;
 		}
 
+		cout << u8"Zadaj pod¾a ktorého kritéria chceš tabu¾ku utriedi -> 1 - pod¾a názvu, 2 - pod¾a úèasti, 3 - pod¾a volièov: " << endl;
+		cin >> kriterium;
+
+		if (kriterium == '1')
+			hladacik->setKriteriumNazov(true);
+
+		if (kriterium == '2')
+			hladacik->setKriteriumUcast(true);
+
+		if (kriterium == '3')
+			hladacik->setKriteriumVolici(true);
+
 
 		hladacik->uloha3a(nazovHladanejObce, prislusnost, typ, dolnaHUcast, hornaHUcast, dolnaHVolici, hornaHVolici);		
 		spravnyTyp = true;
-		delete hladacik;	;
+		delete hladacik;
 
 	}
 }

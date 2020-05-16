@@ -72,7 +72,7 @@ namespace structures
 
 		/// <summary> Vymaze tabulku. </summary>
 		void clear() override;
-
+		void setKluc(K staryKluc, K novyKluc);
 		/// <summary> Vrati skutocny iterator na zaciatok struktury </summary>
 		/// <returns> Iterator na zaciatok struktury. </returns>
 		/// <remarks> Zabezpecuje polymorfizmus. </remarks>
@@ -230,6 +230,14 @@ namespace structures
 			delete item;
 		}
 		this->list_->clear();
+	}
+
+	template<typename K, typename T>
+	inline void SequenceTable<K, T>::setKluc(K staryKluc, K novyKluc)
+	{
+		TableItem<K, T>* item = this->findTableItem(staryKluc);
+		item->setK(novyKluc);
+			
 	}
 
 	template<typename K, typename T>

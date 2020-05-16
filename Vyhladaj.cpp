@@ -120,7 +120,11 @@ void Vyhladaj::uloha3a(std::string nazov, std::string nazovPrislusnosti, TypUzem
 void Vyhladaj::vyfiltruj(SequenceTable<string, LinkedList<UzemnaJednotka*>*>* tabulkaNaSort)
 {
 	UnsortedSequenceTable<int, UzemnaJednotka*>* tabulkaNaZoradenie = new UnsortedSequenceTable<int, UzemnaJednotka*>();
-	KriteriumNazov* kNaz = new KriteriumNazov();
+	
+	Kriterium<UzemnaJednotka, string>* kNaz = new KriteriumNazov();
+	Kriterium<UzemnaJednotka, int>* kVol = new KriteriumVolici();
+	Kriterium<UzemnaJednotka, double>* kUca = new KriteriumUcast();
+
 	QuickSort<int, UzemnaJednotka*>* sort = new QuickSort<int, UzemnaJednotka*>;
 	
 	for (auto temp : *tabulkaNaSort)
@@ -132,16 +136,27 @@ void Vyhladaj::vyfiltruj(SequenceTable<string, LinkedList<UzemnaJednotka*>*>* ta
 			tabulkaNaZoradenie->insert(kluc, uJ->operator[](i));			
 		}
 	}
+
+	if (this->kriteriumNazov)	
 	sort->sortSKriteriom(*tabulkaNaZoradenie, *kNaz, false);
+	
+	if (this->kriteriumUcast)
+	sort->sortSKriteriom(*tabulkaNaZoradenie, *kUca, false);
+
+	if (this->kriteriumVolici)
+	sort->sortSKriteriom(*tabulkaNaZoradenie, *kVol, false);
+
 
 	for (auto temp : *tabulkaNaZoradenie)
 	{
-		cout << temp->accessData()->getNazov() << endl; 
+		cout << temp->accessData()->getNazov() << " "; 
 		temp->accessData()->vypis();	
 	}
 
 	delete tabulkaNaZoradenie;
 	delete kNaz;
+	delete kUca;
+	delete kVol;
 	delete sort;
 	
 

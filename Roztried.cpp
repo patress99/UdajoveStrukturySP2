@@ -23,9 +23,6 @@ Roztried::~Roztried()
 	delete this->tabulkaVsetkehoPodlaNazvu_;
 	this->tabulkaVsetkehoPodlaNazvu_ = nullptr;
 
-
-
-
 	if (!this->tabulkaVsetkeho_->isEmpty())
 	{
 
@@ -37,14 +34,6 @@ Roztried::~Roztried()
 			}
 
 		}
-		/*for (size_t i = 0; i < this->tabulkaVsetkeho_->size(); i++)
-		{
-			if (this->tabulkaVsetkeho_->getItemAtIndex(i).accessData() != nullptr)
-			{
-				delete this->tabulkaVsetkeho_->getItemAtIndex(i).accessData();
-			}
-
-		}*/
 		this->tabulkaVsetkeho_->clear();
 		delete this->tabulkaVsetkeho_;
 		this->tabulkaVsetkeho_ = nullptr;
