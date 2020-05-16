@@ -7,6 +7,9 @@ UzemnaJednotka::UzemnaJednotka(string nazov, TypUzemnejJednotky typ, UzemnaJedno
 	this->pocet_zap_volicov_ = 0;
 	this->ucast_ = 0.0;
 	this->pocet_zuc_volicov_ = 0;
+	this->platneHlasy_ = 0.0;
+	this->p_ooo = 0;
+	this->p_noc = 0;
 }
 
 UzemnaJednotka::~UzemnaJednotka()
@@ -41,7 +44,7 @@ void UzemnaJednotka::setUcast(double ucast)
 
 double UzemnaJednotka::getUcast() const
 {
-	return this->ucast_;
+	return ((this->pocet_zuc_volicov_ / this->pocet_zap_volicov_) * 100.00);
 }
 
 
@@ -68,6 +71,18 @@ int UzemnaJednotka::getPocetZUcastnenych()
 double UzemnaJednotka::ucastVPct()
 {
 	return ((this->pocet_zuc_volicov_/this->pocet_zap_volicov_)*100.00);
+}
+
+void UzemnaJednotka::splnaFilter(bool nastav)
+{
+	this->splnaFilter_ = nastav;
+}
+
+void UzemnaJednotka::vypis()
+{
+	cout << u8"Úèas v %: " << this->ucastVPct() << u8", poèet zapísaných volièov: " << this->getPocetZapisanychVolicov() << u8", poèet zúèastnených volièov: " << this->getPocetZUcastnenych() << 
+	u8", poèet obálok odovzdaných osobne " << this->getPocetVolicovOsobne() << u8", z cudziny " << this->getPocetVolicovZCudziny() << u8", podiel platných hlasov: " <<
+	" " << this->podielPlatnychHlasov() << " " << endl;
 }
 
 
@@ -123,8 +138,8 @@ bool UzemnaJednotka::patriPod(UzemnaJednotka* uJ) const
 	}
 
 	if (this->getTypUzemnejJednotky() == STAT)
-	{
-		return true;
+	{	
+		return false;
 	}
 
 }

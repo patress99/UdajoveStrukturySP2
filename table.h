@@ -12,6 +12,10 @@ namespace structures
 	class TableItem : public DataItem<T>
 	{
 	public:
+		void setK(K key)
+		{
+			this->key_ = key;
+		}
 		/// <summary> Konstruktor. </summary>
 		/// <param name = "key"> Kluc prvku. </param>
 		/// <param name = "data"> Data, ktore uchovava. </param>
@@ -116,6 +120,8 @@ namespace structures
 	{
 		return key_;
 	}
+
+
 
 	template<typename K, typename T>
 	inline Table<K, T>::Table() :

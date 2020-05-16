@@ -18,6 +18,7 @@ Roztried::~Roztried()
 		string kluc = temp->getKey();
 		delete (*this->tabulkaVsetkehoPodlaNazvu_)[kluc];
 	}
+
 	this->tabulkaVsetkehoPodlaNazvu_->clear();
 	delete this->tabulkaVsetkehoPodlaNazvu_;
 	this->tabulkaVsetkehoPodlaNazvu_ = nullptr;
@@ -264,21 +265,45 @@ void Roztried::priradDataObciam()
 				obec->setPocetZapisanychVolicov(p_Zap);
 				obec->setUcast(ucast);
 				obec->setPocetZucastnenych(p_Zuc);
+				obec->setPocetVolicovOsobne(p_ooo);
+				obec->setPocetVolicovZCudziny(p_noc);
+				obec->setSpolu(p_ooo);
+				obec->setSpolu(p_noc);
+				obec->setPlatneHlasy(p_hl);
 
 				UzemnaJednotka* okres = obec->getkamPatrimJa();
 				okres->setPocetZapisanychVolicov(p_Zap);
 				okres->setUcast(ucast);
 				okres->setPocetZucastnenych(p_Zuc);
+				okres->setPocetVolicovOsobne(p_ooo);
+				okres->setPocetVolicovZCudziny(p_noc);
+				okres->setSpolu(p_ooo);
+				okres->setSpolu(p_noc);
+				okres->setPlatneHlasy(p_hl);
+
+
 
 				UzemnaJednotka* kraj = okres->getkamPatrimJa();
 				kraj->setPocetZapisanychVolicov(p_Zap);
 				kraj->setUcast(ucast);
 				kraj->setPocetZucastnenych(p_Zuc);
+				kraj->setPocetVolicovOsobne(p_ooo);
+				kraj->setPocetVolicovZCudziny(p_noc);
+				kraj->setSpolu(p_ooo);
+				kraj->setSpolu(p_noc);
+				kraj->setPlatneHlasy(p_hl);
+
+
 
 				UzemnaJednotka* stat = kraj->getkamPatrimJa();
 				stat->setPocetZapisanychVolicov(p_Zap);
 				stat->setUcast(ucast);
 				stat->setPocetZucastnenych(p_Zuc);
+				stat->setPocetVolicovOsobne(p_ooo);
+				stat->setPocetVolicovZCudziny(p_noc);
+				stat->setSpolu(p_ooo);
+				stat->setSpolu(p_noc);
+				stat->setPlatneHlasy(p_hl);
 
 			}
 
