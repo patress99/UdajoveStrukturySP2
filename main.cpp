@@ -6,37 +6,84 @@
 #include "heap_monitor.h"
 #include "FilterBasic.h"
 #include "Vyhladaj.h"
+#include <codecvt>
+#include <string>
+#include <io.h>
+#include <fcntl.h>
+#pragma execution_character_set( "utf-8" )
+
 #define MAX_INPUT_LENGTH 255
 
-
-
 using namespace structures;
+std::string wstring_to_utf8(const std::wstring& str);
+std::wstring utf8_to_wstring(const std::string& str);
+std::string utf8_encode(const std::wstring& wstr);
+std::wstring utf8_decode(const std::string& str);
 
 void spusti();
 
-int main()
+int wmain(int argc, wchar_t* argv[])
 {
-	initHeapMonitor();/*
-	SetConsoleOutputCP(CP_UTF8);
-	SetConsoleCP(CP_UTF8);*/
-	std::locale::global(locale("en_US.utf8"));
-	
+	//SetConsoleCP(1250);
+	_setmode(_fileno(stdout), _O_U16TEXT);
+	//SetConsoleOutputCP(65001);
+	initHeapMonitor();
+	//SetConsoleOutputCP(CP_UTF8);
+	//SetConsoleCP(CP_UTF8);
+	//setlocale(LC_ALL, "");
+	//locale sk("Slovak");
+	//locale::global(sk);
+
+
+	Vyhladaj* hladacik = new Vyhladaj();	
+	hladacik->setFilterNazov(true);
+
 	wstring s;
 	wcin >> s;
-	wcout << s;
 
+	wcout << s << endl;
 
-	//std::printf("ENTERED: %s\n", mb_str);
-
-//	Vyhladaj* hladacik = new Vyhladaj();	
-//	hladacik->setFilterNazov(true);
 	
 	//spusti();
-///	hladacik->uloha3a(s, "", OBEC, 0, 0, 0, 0);
+	hladacik->uloha3a(u8"Košúty","", OBEC, 0, 0, 0, 0);
 
 
 	return 0;
 };
+
+
+std::string wstring_to_utf8(const std::wstring& str)
+{
+	std::wstring_convert<std::codecvt_utf8<wchar_t>> myconv;
+	return myconv.to_bytes(str);
+}
+
+std::wstring utf8_to_wstring(const std::string& str)
+{
+	std::wstring_convert<std::codecvt_utf8<wchar_t>> myconv;
+	return myconv.from_bytes(str);
+}
+
+// Convert a wide Unicode string to an UTF8 string
+std::string utf8_encode(const std::wstring& wstr)
+{
+	if (wstr.empty()) return std::string();
+	int size_needed = WideCharToMultiByte(CP_UTF8, 0, &wstr[0], (int)wstr.size(), NULL, 0, NULL, NULL);
+	std::string strTo(size_needed, 0);
+	WideCharToMultiByte(CP_UTF8, 0, &wstr[0], (int)wstr.size(), &strTo[0], size_needed, NULL, NULL);
+	return strTo;
+}
+
+// Convert an UTF8 string to a wide Unicode String
+std::wstring utf8_decode(const std::string& str)
+{
+	if (str.empty()) return std::wstring();
+	int size_needed = MultiByteToWideChar(CP_UTF8, 0, &str[0], (int)str.size(), NULL, 0);
+	std::wstring wstrTo(size_needed, 0);
+	MultiByteToWideChar(CP_UTF8, 0, &str[0], (int)str.size(), &wstrTo[0], size_needed);
+	return wstrTo;
+}
+
 
 void spusti()
 {
